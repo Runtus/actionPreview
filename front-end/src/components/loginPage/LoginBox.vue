@@ -38,6 +38,7 @@
                     {
                         console.log(objOfName[0].name);
                         alert(objOfName[0].name + ", 您已经登陆成功!");
+                        this.$router.push('/index');
                     }
                     else{
                         alert("账号密码错误，请重试!");

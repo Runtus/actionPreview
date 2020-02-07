@@ -1,9 +1,8 @@
 const express = require("express");
 const mysql = require("mysql");
-
-
-var number = 0;
-
+const bodyParser = require("body-parser");
+const querystring = require("querystring");
+const util = require("util");
 let app = express();
 
 let connect = mysql.createConnection({
@@ -13,9 +12,18 @@ let connect = mysql.createConnection({
     password : "Lan201803",
     database : "test"
 });
-
-
 connect.connect();
+
+var number = 0;
+
+
+
+
+
+
+
+app.use(bodyParser.urlencoded({ extended: false })) 
+app.use(bodyParser.json());
 
 app.all('*', function(req, res, next) {  
     res.header("Access-Control-Allow-Origin", "*");  
@@ -24,8 +32,18 @@ app.all('*', function(req, res, next) {
     res.header("X-Powered-By",' 3.2.1')  
     res.header("Content-Type", "application/json;charset=utf-8");
     console.log(req.method);  
-    next();  
-});  
+    if(req.method === 'OPTIONS')
+    {
+        res.sendStatus(200);
+    }
+    else
+    {
+        next();  
+    }
+    
+});  //跨域处理
+
+
 
 
 app.get("/",(req,res) => {
@@ -64,8 +82,14 @@ app.get('/login',(req,res) => {
     }
 })
 
-app.options('/login',(req,res) => {
-    console.log("看下有没有options请求");
+app.post('/pubAct',(req,res) => {
+    console.log(req.url);
+    res.send("收到数据!");
+    
+})
+
+app.options('/pubAct',(req,res) => {
+    res.send("options");
 })
 
 app.listen(8088,() => {

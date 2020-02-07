@@ -1,12 +1,18 @@
 <template>
     <div>
-        <p>这是index页面</p>
+        <div>
+            <router-link to="/login">Login</router-link>
+            <router-link to="/index">Index</router-link>
+        </div>
+        <pub-action></pub-action>
     </div>
 </template>
 
 <script>
+    import PubAction from "../components/indexPage/pubAction";
     export default {
-        name: "index"
+        name: "index",
+        components: {PubAction}
     }
 </script>
 

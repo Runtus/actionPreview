@@ -1,7 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="abbdedc8-3031-4d8d-831a-1502c8c70c97" name="Default Changelist" comment="" />
+    <list default="true" id="abbdedc8-3031-4d8d-831a-1502c8c70c97" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../2019.11.26需求.docx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../功能块安排.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frone-end/.idea/dictionaries/lanhanlin.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frone-end/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frone-end/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frone-end/.idea/test.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frone-end/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frone-end/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frone-end/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frone-end/babel.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frone-end/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frone-end/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frone-end/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frone-end/public/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frone-end/src/App.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frone-end/src/assets/XinRuan.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frone-end/src/assets/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frone-end/src/axios.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frone-end/src/components/LoginBox.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frone-end/src/components/loginPage/headBar.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frone-end/src/main.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frone-end/src/router/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frone-end/src/store/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frone-end/src/views/index.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frone-end/src/views/login.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frone-end/vue.config.js" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -16,15 +43,19 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProjectId" id="1XQnNMcC2R9wG1ggBpNh5PILi5i" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -36,6 +67,11 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="prettierjs.PrettierConfiguration.Package" value="$PROJECT_DIR$/node_modules/prettier" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components/loginPage" />
+    </key>
   </component>
   <component name="RunManager" selected="npm.serve">
     <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -81,40 +117,48 @@
       <workItem from="1581040135254" duration="3998000" />
       <workItem from="1581059099799" duration="1143000" />
       <workItem from="1581062389127" duration="1648000" />
+      <workItem from="1581064753485" duration="12441000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
   <component name="WindowStateProjectService">
-    <state width="1899" height="286" key="GridCell.Tab.0.bottom" timestamp="1581060346516">
-      <screen x="-288" y="-1080" width="1920" height="1080" />
+    <state width="949" height="172" key="GridCell.Tab.0.bottom" timestamp="1581087087063">
+      <screen x="-288" y="-1057" width="1920" height="1057" />
     </state>
-    <state width="1899" height="286" key="GridCell.Tab.0.bottom/0.0.1440.900/-288.-1080.1920.1080@-288.-1080.1920.1080" timestamp="1581060346516" />
+    <state width="1899" height="286" key="GridCell.Tab.0.bottom/0.0.1440.900/-288.-1080.1920.1080@-288.-1080.1920.1080" timestamp="1581076940115" />
+    <state width="949" height="172" key="GridCell.Tab.0.bottom/0.23.1440.822/-288.-1057.1920.1057@-288.-1057.1920.1057" timestamp="1581087087063" />
     <state width="1899" height="286" key="GridCell.Tab.0.bottom/0.23.1440.877/-288.-1080.1920.1080@-288.-1080.1920.1080" timestamp="1581002466823" />
-    <state width="1899" height="286" key="GridCell.Tab.0.center" timestamp="1581060346514">
-      <screen x="-288" y="-1080" width="1920" height="1080" />
+    <state width="949" height="172" key="GridCell.Tab.0.center" timestamp="1581087087062">
+      <screen x="-288" y="-1057" width="1920" height="1057" />
     </state>
-    <state width="1899" height="286" key="GridCell.Tab.0.center/0.0.1440.900/-288.-1080.1920.1080@-288.-1080.1920.1080" timestamp="1581060346514" />
+    <state width="1899" height="286" key="GridCell.Tab.0.center/0.0.1440.900/-288.-1080.1920.1080@-288.-1080.1920.1080" timestamp="1581076940113" />
+    <state width="949" height="172" key="GridCell.Tab.0.center/0.23.1440.822/-288.-1057.1920.1057@-288.-1057.1920.1057" timestamp="1581087087062" />
     <state width="1899" height="286" key="GridCell.Tab.0.center/0.23.1440.877/-288.-1080.1920.1080@-288.-1080.1920.1080" timestamp="1581002466821" />
-    <state width="1899" height="286" key="GridCell.Tab.0.left" timestamp="1581060346514">
-      <screen x="-288" y="-1080" width="1920" height="1080" />
+    <state width="949" height="172" key="GridCell.Tab.0.left" timestamp="1581087087061">
+      <screen x="-288" y="-1057" width="1920" height="1057" />
     </state>
-    <state width="1899" height="286" key="GridCell.Tab.0.left/0.0.1440.900/-288.-1080.1920.1080@-288.-1080.1920.1080" timestamp="1581060346514" />
+    <state width="1899" height="286" key="GridCell.Tab.0.left/0.0.1440.900/-288.-1080.1920.1080@-288.-1080.1920.1080" timestamp="1581076940112" />
+    <state width="949" height="172" key="GridCell.Tab.0.left/0.23.1440.822/-288.-1057.1920.1057@-288.-1057.1920.1057" timestamp="1581087087061" />
     <state width="1899" height="286" key="GridCell.Tab.0.left/0.23.1440.877/-288.-1080.1920.1080@-288.-1080.1920.1080" timestamp="1581002466820" />
-    <state width="1899" height="286" key="GridCell.Tab.0.right" timestamp="1581060346515">
-      <screen x="-288" y="-1080" width="1920" height="1080" />
+    <state width="949" height="172" key="GridCell.Tab.0.right" timestamp="1581087087062">
+      <screen x="-288" y="-1057" width="1920" height="1057" />
     </state>
-    <state width="1899" height="286" key="GridCell.Tab.0.right/0.0.1440.900/-288.-1080.1920.1080@-288.-1080.1920.1080" timestamp="1581060346515" />
+    <state width="1899" height="286" key="GridCell.Tab.0.right/0.0.1440.900/-288.-1080.1920.1080@-288.-1080.1920.1080" timestamp="1581076940115" />
+    <state width="949" height="172" key="GridCell.Tab.0.right/0.23.1440.822/-288.-1057.1920.1057@-288.-1057.1920.1057" timestamp="1581087087062" />
     <state width="1899" height="286" key="GridCell.Tab.0.right/0.23.1440.877/-288.-1080.1920.1080@-288.-1080.1920.1080" timestamp="1581002466822" />
     <state x="444" y="-670" width="547" height="279" key="org.intellij.images.editor.actions.BackgroundImageDialog" timestamp="1580987167893">
       <screen x="-288" y="-1080" width="1920" height="1080" />
     </state>
     <state x="444" y="-670" width="547" height="279" key="org.intellij.images.editor.actions.BackgroundImageDialog/0.0.1440.900/-288.-1080.1920.1080@-288.-1080.1920.1080" timestamp="1580987167893" />
-    <state x="337" y="-839" width="670" height="676" key="search.everywhere.popup" timestamp="1580987160405">
+    <state x="337" y="-839" width="670" height="676" key="search.everywhere.popup" timestamp="1581075403334">
       <screen x="-288" y="-1080" width="1920" height="1080" />
     </state>
-    <state x="337" y="-839" width="670" height="676" key="search.everywhere.popup/0.0.1440.900/-288.-1080.1920.1080@-288.-1080.1920.1080" timestamp="1580987160405" />
+    <state x="337" y="-839" width="670" height="676" key="search.everywhere.popup/0.0.1440.900/-288.-1080.1920.1080@-288.-1080.1920.1080" timestamp="1581075403334" />
   </component>
 </project>

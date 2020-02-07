@@ -6,7 +6,7 @@
 </template>
 
 <script>
-    import loginBox from "../components/LoginBox";
+    import loginBox from "../components/loginPage/LoginBox";
     import HeadBar from "../components/loginPage/headBar"; //注意import
     export default {
         name: "login",
