@@ -45,20 +45,19 @@
         methods: {
             submit(){
                 let postData ={
-                    actTitle : this.actTitle,
-                    actDate : this.actDate ,
-                    actTime : this.actTime,
-                    actPlace : this.actPlace,
-                    isSerious : this.isSerious,
-                    actInf : this.actInf
+                    "actTitle" : this.actTitle,
+                    "actDate" : this.actDate ,
+                    "actTime" : this.actTime,
+                    "actPlace" : this.actPlace,
+                    "isSerious" : this.isSerious,
+                    "actInf" : this.actInf
                 };//发送的数据
 
-                this.$request.post("/pubAct",postData).then((err,result) => {
-                    if (err)
-                    {
-                        console.log("请求出错");
-                        return ;
+                this.$request.post("/pubAct",postData,{
+                    headers : {
+                        'Content-Type':'application/json;charset=utf-8' //跨域字段处处理，json格式好
                     }
+                }).then((result) => {
                     console.log(result);
                 }).catch((err) => {
                     console.log(err);

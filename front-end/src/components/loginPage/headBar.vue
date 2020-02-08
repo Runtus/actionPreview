@@ -1,13 +1,9 @@
 <template>
-    <div id="headBar">
-        <div id="imageBox">
-            <img src="../../assets/XinRuan.jpg" >
-        </div>
-        <div id="router-box">
-            <router-link to="/login">Login&nbsp/&nbsp</router-link>
-            <router-link to="/index">Index</router-link>
-        </div>
-    </div>
+    <Row id="headBar">
+        <Col id="imageBox" span="5">
+            <img src="../../assets/xr.png" >
+        </Col>
+    </Row>
 </template>
 
 <script>
@@ -24,14 +20,12 @@
 
 /*图片样式设置*/
 #imageBox{
-    width: 100px;
-    height: 100px;
     position: relative;
 }
 
 #imageBox > img{
     width: 100%;
-    height: 100%;
+    height: 60%;
 }
 
 

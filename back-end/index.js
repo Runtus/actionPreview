@@ -1,3 +1,4 @@
+'use strict'
 const express = require("express");
 const mysql = require("mysql");
 const bodyParser = require("body-parser");
@@ -21,20 +22,20 @@ var number = 0;
 
 
 
-
+const jsonParser = bodyParser.json();//对Json的处理
 app.use(bodyParser.urlencoded({ extended: false })) 
-app.use(bodyParser.json());
+app.use(jsonParser);//用于对post请求体的处理
 
-app.all('*', function(req, res, next) {  
+app.all('*', function(req, res, next) { 
+    res.header("Content-Type", "application/json;charset=utf-8"); 
     res.header("Access-Control-Allow-Origin", "*");  
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");  
+    res.header("Access-Control-Allow-Headers", "X-Requested-With,content-type");  //允许接受content-type头部的跨域。
     res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");  
-    res.header("X-Powered-By",' 3.2.1')  
-    res.header("Content-Type", "application/json;charset=utf-8");
+    res.header("X-Powered-By",' 3.2.1');  
     console.log(req.method);  
     if(req.method === 'OPTIONS')
     {
-        res.sendStatus(200);
+        res.send("Options");
     }
     else
     {
@@ -81,10 +82,53 @@ app.get('/login',(req,res) => {
         number = 0;
     }
 })
+app.get('/pubAct',(req,res) => {
+    res.sendStatus(200);
+})
+
 
 app.post('/pubAct',(req,res) => {
     console.log(req.url);
-    res.send("收到数据!");
+    console.log(req.body);
+    {
+        let dian = "'";//字符串必须加引号，否则要报错。
+        let actTitle =dian +  req.body.actTitle + dian;
+        let actDate =  dian + req.body.actDate + " " + req.body.actTime[0] +" "+  req.body.actTime[1] + dian;
+        let actPlace = dian + req.body.actPlace + dian;
+        let isSerious = dian + req.body.isSerious + dian;
+        let actInf = dian + req.body.actInf + dian;
+        
+        
+        console.log(actTitle);
+        console.log(actDate);
+        console.log(actPlace);
+        console.log(isSerious);
+        console.log(actInf);
+        if(isSerious === true)
+        {
+            isSerious = 1;
+        }
+        else
+        {
+            isSerious = 0;
+        }
+        let query = `insert into actionsTotal (actTitle , actDate, actPlace, isSerious, actInf , teacherName) values (` + actTitle + `,` + actDate + `,` + actPlace + `,` + isSerious + `,` + actInf + `,'白龙飞');` ;//规定参数
+        console.log(query);
+        connect.query(query,(err,result) => {
+            if(err)
+            {
+                res.end("提交失败");
+            }
+            else{
+                console.log(result);
+                res.send("成功插入数据")
+            }
+        })
+    
+
+    }
+   
+    
     
 })
 

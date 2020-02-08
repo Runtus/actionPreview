@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div >
         <head-bar></head-bar>
         <login-box></login-box>
     </div>
@@ -15,5 +15,12 @@
 </script>
 
 <style scoped>
+#login{
+    /*position: relative;*/
+}
 
+login-box{
+
+    border: 1px solid red;
+}
 </style>

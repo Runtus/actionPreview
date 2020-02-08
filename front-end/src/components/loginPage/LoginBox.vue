@@ -1,15 +1,17 @@
 <template>
-    <div>
-        <div id="FirstBox">
-            <form id="account">
-                <span>账号:</span>
-                    <input type="text"  v-model = "account">
-                <span>密码:</span>
-                    <input type="password" v-model = "password">
-            </form>
-            <button v-on:click="Login()">登陆</button>
+    <div id="FirstBox" >
+        <Row class="Block">
+                <Col span="18" offset="3">   <Input v-model="account" placeholder="账号"  />  </Col>
+        </Row>
+        <Row class="Block">
 
-        </div>
+                <Col span="18" offset="3">   <Input v-model="password" type="password" placeholder="密码" password /> </Col>
+        </Row>
+        <Row class="Block">
+            <Col offset="0">
+                <Button v-on:click="Login()" type="primary">登陆</Button>
+            </Col>
+        </Row>
     </div>
 </template>
 
@@ -59,6 +61,17 @@
 <style scoped>
 #FirstBox{
     border: 1px solid black;
-    width: 50%;
+    width: 40%;
+    position: relative;
 }
+.Block{
+    margin-top: 5%;
+}
+
+.Block:last-child{
+    margin-bottom: 2%;
+}
+
+
+
 </style>
