@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import login from '../views/login.vue'
 import index from '../views/index'
+import actInf from "../views/actInf";
 
 Vue.use(VueRouter);
 
@@ -19,6 +20,11 @@ const routes = [
     path: "/index",
     name : "index",
     component : index
+  },
+  {
+    path: '/actInf',
+    name  : "actInf",
+    component : actInf
   }
 
 ];

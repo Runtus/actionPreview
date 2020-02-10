@@ -1,27 +1,40 @@
 <template>
     <div id="pubAction">
         <div id="form">
-            <div class="form-box">
-                <span>活动标题:</span>
-                <input type="text" v-model="actTitle">
-            </div>
-            <div class="form-box">
-                <span>活动时间:</span>
-                <date-picker @timeIsComing="catchTime"  @dateIsComing="catchDate"></date-picker>
-            </div>
-            <div class="form-box">
-                <span>活动地点:</span>
-                <input type="text" v-model="actPlace">
-            </div>
-            <div class="form-box">
-                <span>是否为紧急事件</span>
-                <input type="checkbox" v-model="isSerious">是<br>
-            </div>
-            <div class="form-box">
-                <span>活动详情</span>
-                <textarea v-model="actInf"></textarea>
-            </div>
-            <button v-on:click="submit()">提交</button>
+            <Row class="form-box">
+                <Col span="6" class="font">活动标题:</Col>
+                <Col span="17">
+                    <Input type="text" v-model="actTitle" placeholder="标题"/>
+                </Col>
+            </Row>
+            <Row class="form-box">
+                <Col>
+                    <date-picker @timeIsComing="catchTime"  @dateIsComing="catchDate"></date-picker>
+                </Col>
+            </Row>
+            <Row class="form-box">
+                <Col class="font" span="6">活动地点:</Col>
+                <Col span="17">
+                    <Input type="text" v-model="actPlace" placeholder="地点" />
+                </Col>
+            </Row>
+            <Row class="form-box" >
+                <Col class="font" span="6">紧急事件:</Col>
+                <Col span="5">
+                    <Checkbox label="是" border>是</Checkbox>
+                </Col>
+            </Row>
+            <Row class="form-box">
+                <Col class="font" span="6">活动详情:</Col>
+                <Col span="17">
+                    <Input v-model="actInf" show-word-limit type="textarea" maxlength="200" placeholder="活动内容" :rows="10"></Input>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <Button v-on:click="submit()" type="info">提交</Button>
+                </Col>
+            </Row>
         </div>
     </div>
 </template>
@@ -53,15 +66,15 @@
                     "actInf" : this.actInf
                 };//发送的数据
 
-                this.$request.post("/pubAct",postData,{
-                    headers : {
-                        'Content-Type':'application/json;charset=utf-8' //跨域字段处处理，json格式好
-                    }
-                }).then((result) => {
-                    console.log(result);
-                }).catch((err) => {
-                    console.log(err);
-                })
+                // this.$request.post("/pubAct",postData,{
+                //     headers : {
+                //         'Content-Type':'application/json;charset=utf-8' //跨域字段处处理，json格式好
+                //     }
+                // }).then((result) => {
+                //     console.log(result);
+                // }).catch((err) => {
+                //     console.log(err);
+                // })//为了防止手贱 把这里先注释掉
 
             },
             catchTime(time){
@@ -80,8 +93,9 @@
 <style scoped>
 
 #pubAction{
+    position: relative;
     border: 1px solid black;
-    width: 70%;
+    width: 900px;
 }
 
 #form{
@@ -94,6 +108,10 @@
     flex-direction: row;
     border: 1px solid red;
     margin : 10px auto;
+    width:600px;
 }
-
+/*每段输入框提示字体*/
+.font{
+    font-size: 1.5em;
+}
 </style>

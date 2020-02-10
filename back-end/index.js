@@ -2,8 +2,9 @@
 const express = require("express");
 const mysql = require("mysql");
 const bodyParser = require("body-parser");
-const querystring = require("querystring");
 const util = require("util");
+const cookieParser = require("cookie-parser");
+const querystring = require("querystring");
 let app = express();
 
 let connect = mysql.createConnection({
@@ -17,7 +18,7 @@ connect.connect();
 
 var number = 0;
 
-
+app.use(cookieParser());//cookie处理
 
 
 
@@ -28,11 +29,12 @@ app.use(jsonParser);//用于对post请求体的处理
 
 app.all('*', function(req, res, next) { 
     res.header("Content-Type", "application/json;charset=utf-8"); 
-    res.header("Access-Control-Allow-Origin", "*");  
+    res.header("Access-Control-Allow-Origin", req.headers.origin);  
     res.header("Access-Control-Allow-Headers", "X-Requested-With,content-type");  //允许接受content-type头部的跨域。
     res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");  
     res.header("X-Powered-By",' 3.2.1');  
-    console.log(req.method);  
+    res.header("Access-Control-Allow-Credentials",true);
+    console.log("这里是app.all "+req.method);  
     if(req.method === 'OPTIONS')
     {
         res.send("Options");
@@ -41,7 +43,6 @@ app.all('*', function(req, res, next) {
     {
         next();  
     }
-    
 });  //跨域处理
 
 
@@ -56,12 +57,13 @@ app.get("/",(req,res) => {
 
 app.get('/login',(req,res) => {
     number++;
+    
     if(number === 1) //设定第一次访问
     {
+    
         let account = req.query.aco;
         let password = req.query.psw;
         let query = `select name from students where account=`+account +` and password=`+password;
-        console.log(query);
         connect.query(query ,(err,result) =>{
             if(err)
             {
@@ -70,9 +72,9 @@ app.get('/login',(req,res) => {
             }
             if(result !== "")
             {
-                let string = JSON.stringify(result);
-            
-                console.log(string);
+                console.log(req.cookies);
+                let cookieInf = account + "";
+                res.cookie("UserId",cookieInf,{maxAge : 1000 * 60,httpOnly : true });
                 res.json(result);
                 console.log("第"+number+"次到达这里");
             }
@@ -82,8 +84,23 @@ app.get('/login',(req,res) => {
         number = 0;
     }
 })
-app.get('/pubAct',(req,res) => {
-    res.sendStatus(200);
+
+app.get('/pubAct',(req,res) => { //刷新
+    console.log(req.cookies);
+    let account = req.cookies.UserId;
+    let query = `select name from students where account=`+account;
+    connect.query(query,(err,result) => {
+        if(err)
+        {
+            console.log(err);
+        }
+        else
+        {
+            console.log(result[0].name);
+            res.send(result[0].name);
+        }
+    })
+    
 })
 
 
@@ -97,13 +114,12 @@ app.post('/pubAct',(req,res) => {
         let actPlace = dian + req.body.actPlace + dian;
         let isSerious = dian + req.body.isSerious + dian;
         let actInf = dian + req.body.actInf + dian;
-        
-        
-        console.log(actTitle);
-        console.log(actDate);
-        console.log(actPlace);
-        console.log(isSerious);
-        console.log(actInf);
+        //调试用
+        // console.log(actTitle);
+        // console.log(actDate);
+        // console.log(actPlace);
+        // console.log(isSerious);
+        // console.log(actInf);
         if(isSerious === true)
         {
             isSerious = 1;
