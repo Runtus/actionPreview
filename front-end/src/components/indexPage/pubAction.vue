@@ -21,7 +21,7 @@
             <Row class="form-box" >
                 <Col class="font" span="6">紧急事件:</Col>
                 <Col span="5">
-                    <Checkbox label="是" border>是</Checkbox>
+                    <Checkbox label="是" border v-model="isSerious" >是</Checkbox>
                 </Col>
             </Row>
             <Row class="form-box">
@@ -51,12 +51,22 @@
                 actDate : "",//活动日期
                 actTime : "",//活动时间
                 actPlace : "",
-                isSerious : "",
+                isSerious : false,
                 actInf : ""
             }
         },
         methods: {
             submit(){
+                console.log(this.isSerious);
+                if(this.isSerious === true || this.isSerious === 1)
+                {
+                    this.isSerious = 1;
+                }
+                else
+                {
+                    this.isSerious = 0;
+                }
+
                 let postData ={
                     "actTitle" : this.actTitle,
                     "actDate" : this.actDate ,
@@ -65,16 +75,16 @@
                     "isSerious" : this.isSerious,
                     "actInf" : this.actInf
                 };//发送的数据
-
-                // this.$request.post("/pubAct",postData,{
-                //     headers : {
-                //         'Content-Type':'application/json;charset=utf-8' //跨域字段处处理，json格式好
-                //     }
-                // }).then((result) => {
-                //     console.log(result);
-                // }).catch((err) => {
-                //     console.log(err);
-                // })//为了防止手贱 把这里先注释掉
+                console.log(postData.isSerious);
+                this.$request.post("/pubAct",postData,{
+                    headers : {
+                        'Content-Type':'application/json;charset=utf-8' //跨域字段处处理，json格式好
+                    }
+                }).then((result) => {
+                    console.log(result);
+                }).catch((err) => {
+                    console.log(err);
+                })//为了防止手贱 把这里先注释掉
 
             },
             catchTime(time){

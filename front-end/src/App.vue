@@ -1,10 +1,11 @@
 <template>
   <div id="app">
     <head-bar></head-bar>
-    <dashboard v-if="this.$route.path !== '/login'" class="dashboard"></dashboard>
+    <dashboard v-if="this.$store.state.dashboard" class="dashboard"></dashboard>
     <router-view />
   </div>
 </template>
+
 <style scoped>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -43,6 +44,15 @@
   import HeadBar from "./components/headBar";
   import Dashboard from "./components/dashboard";
   export default {
-    components: {Dashboard, HeadBar}
+    components: {Dashboard, HeadBar},
+    data(){
+      return {
+        judgeDashboardAboutLogin : this.$route.path !== '/login' && this.$route.path !== '/actInf/moreInf' ,
+        theFinalRes : ""
+
+      }
+    }
+
+
   }
 </script>

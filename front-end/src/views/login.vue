@@ -9,9 +9,13 @@
     import HeadBar from "../components/headBar"; //注意import
     export default {
         name: "login",
-        components: {HeadBar, loginBox} //组件
+        components: {HeadBar, loginBox}, //组件
+        beforeMount() {
+                this.$store.state.dashboard = false;
+        }
 
     }
+
 </script>
 
 <style scoped>

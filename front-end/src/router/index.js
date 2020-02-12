@@ -3,14 +3,12 @@ import VueRouter from 'vue-router'
 import login from '../views/login.vue'
 import index from '../views/index'
 import actInf from "../views/actInf";
+import actMoreInf from "../views/actInf/actMoreInf";
 
 Vue.use(VueRouter);
 
 const routes = [
-  {
-    path: '/',
-    redirect : "/login"//重定向登陆界面
-  },
+
   {
     path: '/login',
     name: 'login',
@@ -19,12 +17,23 @@ const routes = [
   {
     path: "/index",
     name : "index",
-    component : index
+    component : index,
+
   },
   {
     path: '/actInf',
     name  : "actInf",
-    component : actInf
+    component : actInf,
+
+  },
+  {
+    path: '/actInf/moreInf',
+    name  : "moreInf",
+    component : actMoreInf
+  },
+  {
+    path: '*',
+    redirect : "/login"//重定向登陆界面
   }
 
 ];

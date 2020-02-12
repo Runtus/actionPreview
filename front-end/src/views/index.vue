@@ -14,6 +14,8 @@
         name: "index",
         components: {PubAction},
         created() {
+            this.$store.state.dashboard = true;
+            console.log(this.$store.state.dashboard);
             this.$request.get('/pubAct',{
                 withCredentials : true,
                 headers:{

@@ -1,5 +1,5 @@
 <template>
-        <Menu :theme="theme3" active-name="1" class="Menu">
+        <Menu :theme="theme3"  class="Menu"  :active-name="choosenMenu" >
             <MenuGroup title="内容管理">
                 <MenuItem name="1" to="/index">
                     <Icon type="md-document" />
@@ -26,13 +26,29 @@
         name: "dashboard",
         data(){
             return {
-                theme3 : 'dark'
+                theme3 : 'dark',
+                menuList : [],
+                choosenMenu : "1",
+                routerList : {
+                    "index" : "1",
+                    "actInf" : "2"
+                }
             }
         },
         methods:{
-            toTheOrder(){
-                console.log("事件触发")
+            highLightChange(){
+                for (name in this.routerList)
+                {
+                    if (name === this.$route.name)
+                    {
+                        this.choosenMenu = this.routerList[name];
+                    }
+                }
+
             }
+        },
+        created() {
+            this.highLightChange();
         }
     }
 </script>
@@ -40,6 +56,6 @@
 <style scoped>
 
 .Menu{
-    border: 1px solid red;
+    /*border: 1px solid red;*/
 }
 </style>
