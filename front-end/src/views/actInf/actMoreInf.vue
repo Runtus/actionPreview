@@ -1,12 +1,16 @@
 <template>
     <Row class="actMoreInf" >
-        <router-link to="/actInf">去大力</router-link>
+        <Col class="col-1" >
+            <student-inf ></student-inf>
+        </Col>
     </Row>
 </template>
 
 <script>
+    import StudentInf from "../../components/pubInf/studentInf";
     export default {
         name: "actMoreInf",
+        components: {StudentInf},
         created() {
             this.$store.state.dashboard = false;
         },
@@ -17,5 +21,13 @@
 </script>
 
 <style scoped>
+.actMoreInf{
+    position: relative;
+    border: 1px solid red;
+}
 
+.col-1{
+    margin-top: 3%;
+    margin-left: 5%;
+}
 </style>
