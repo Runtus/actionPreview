@@ -1,7 +1,7 @@
 <template>
     <div id="actInf">
-        <pub-inf-box></pub-inf-box>
-        <NavigationBox class="Navigation"></NavigationBox>
+        <search-box class="overBox"></search-box>
+        <pub-inf-box class="overBox special"></pub-inf-box>
     </div>
 </template>
 
@@ -9,16 +9,31 @@
 
 <script>
     import PubInfBox from "../components/pubInf/pubInfBox";
-    import NavigationBox from "../components/pubInf/NavigationBox";
+    import SearchBox from "../components/pubInf/searchBox";
     export default {
         name: "actInf",
-        components: {NavigationBox, PubInfBox}
+        components: {SearchBox,  PubInfBox}
     }
 </script>
 
 <style scoped>
+#actInf{
+    height: 100%;
+}
+
+
 .Navigation{
-    margin-top: 2%;
+    position: absolute;
+    left: 2%;
+    bottom: 6%;
     /*border: 1px solid black;*/
 }
+.overBox{
+    margin-left: 240px;
+}
+
+.special{
+    margin-top: 3%;
+}
+
 </style>

@@ -1,18 +1,38 @@
 <template>
     <Row class="actMoreInf" >
         <Col class="col-1" >
-            <student-inf ></student-inf>
+            <student-inf v-bind:student-data="studentInf"></student-inf>
         </Col>
     </Row>
 </template>
+
 
 <script>
     import StudentInf from "../../components/pubInf/studentInf";
     export default {
         name: "actMoreInf",
         components: {StudentInf},
+        data(){
+            return {
+                studentInf : {}
+            }
+        },
         created() {
-            this.$store.state.dashboard = false;
+            console.log(this.$route.query.actId);
+            let actionId = this.$route.query.actId;
+
+            this.$request.get("/actInf/moreInf",{
+                params : {
+                    actionId : actionId
+                }
+            }).then(result => {
+                console.log(result.data);
+                this.studentInf = result.data;
+            }).catch(err => {
+                console.log(err);
+            });
+
+            this.$store.state.dashboard = false;//dashboard板设置
         },
         beforeDestroy() {
             this.$store.state.dashboard = true;
