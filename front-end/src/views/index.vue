@@ -13,18 +13,29 @@
     export default {
         name: "index",
         components: {PubAction},
+
         created() {
             this.$store.state.dashboard = true;
             console.log(this.$store.state.dashboard);
             this.$request.get('/pubAct',{
-                withCredentials : true,
                 headers:{
                     "Content-type":"text/plain;"
                 }
             }).then(
                 (result) => {
-                    console.log(result);
-                    this.$store.state.teaName = result.data;
+
+                    if(result.data.status === "success")
+                    {
+                        console.log("你好"+result.data.teacherName);
+                        this.$store.state.teaName = result.data.teacherName;
+                    }
+                    else
+                    {
+                        alert("登录失效，请重新登录");
+                        this.$router.push("/login");
+                    }
+
+
                 }
             ).catch((err) => {
                 console.log(err);

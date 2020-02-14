@@ -1,23 +1,30 @@
+//这是活动发布的路由
+
 const express = require("express");
 const configMysqlConnect = require("../mysql");
 const router = express.Router();
 
+
 router.get('/',(req,res) => {
-    console.log(req.cookies);
-    let account = req.cookies.UserId;
-    let query = `select name from students where account=${account}`;
-    configMysqlConnect.query(query,(err,result) => {
-        if(err)
-        {
-            console.log(err);
+   console.log(req.session.teacherName);
+   if(req.session.teacherName !== undefined)
+   {
+        let jsonData = {
+            status : "success",
+            teacherName : req.session.teacherName
         }
-        else
-        {
-            console.log(result[0].name);
-            res.send(result[0].name);
-        }
-    })
-})
+        res.json(jsonData);
+   }
+   else
+   {
+        let jsonData =  {
+            status : "fail" ,
+            Inf : "登录时间已经过期，请重新登录!"
+        } 
+        res.json(jsonData);
+
+   }
+})   
 
 router.post("/",(req,res) => {
     console.log(req.url);

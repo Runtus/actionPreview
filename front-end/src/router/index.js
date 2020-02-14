@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import login from '../views/login.vue'
 import index from '../views/index'
 import actInf from "../views/actInf";
-import actMoreInf from "../views/actInf/actMoreInf";
+import actMoreInf from "../views/actInf/studentInf";
 
 Vue.use(VueRouter);
 

@@ -8,7 +8,7 @@
 
 
 <script>
-    import StudentInf from "../../components/pubInf/studentInf";
+    import StudentInf from "../../components/pubInf/moreInf/studentInf";
     export default {
         name: "actMoreInf",
         components: {StudentInf},
@@ -20,14 +20,23 @@
         created() {
             console.log(this.$route.query.actId);
             let actionId = this.$route.query.actId;
-
             this.$request.get("/actInf/moreInf",{
                 params : {
                     actionId : actionId
                 }
             }).then(result => {
-                console.log(result.data);
-                this.studentInf = result.data;
+                if(result.data.status === "fail")
+                {
+                    alert("登录已经失效，请重新登录!");
+                    this.$router.push("/login");
+                }
+                else
+                {
+                    console.log(result.data);
+                    this.studentInf = result.data; //设置学生信息
+                    this.$store.state.teaName = result.data.teacherName;
+                }
+
             }).catch(err => {
                 console.log(err);
             });
