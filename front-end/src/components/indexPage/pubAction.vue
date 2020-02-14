@@ -77,6 +77,7 @@
                 };//发送的数据
                 console.log(postData.isSerious);
                 this.$request.post("/pubAct",postData,{
+                    withCredentials : true,
                     headers : {
                         'Content-Type':'application/json;charset=utf-8' //跨域字段处处理，json格式好
                     }
