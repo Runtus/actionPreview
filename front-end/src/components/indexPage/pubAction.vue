@@ -12,14 +12,14 @@
             <Row>
                 <Col span="11">
                     <FormItem prop="date">
-                        <DatePicker type="date" placeholder="选择日期" v-model="formValidate.actDate"></DatePicker>
+                        <DatePicker type="date" placeholder="选择日期" @on-change='handleChangedDate' format="yyyy-MM-dd" ></DatePicker>
                     </FormItem>
                 </Col>
                 <Col span="2" style="text-align: center">——</Col>
                 <Col span="11">
                     <FormItem prop="time">
                         <!-- <TimePicker type="time" placeholder="选择时间" v-model="formValidate.time"></TimePicker> -->
-                        <TimePicker v-model="formValidate.actTime" format="HH’mm’ss" type="timerange" placement="bottom-end" placeholder="选择时间" ></TimePicker>
+                        <TimePicker  @on-change='handleChangedTime' type="timerange" placement="bottom-end" placeholder="选择时间" ></TimePicker>
                     </FormItem>
                 </Col>
             </Row>
@@ -59,7 +59,7 @@
                     actTitle: '',
                     actPlace: '',
                     actDate: '',
-                    actTime: '',
+                    actTime: "",
                     isSerious:'',
                     isTop:'',
                     actInfo: '',
@@ -136,6 +136,13 @@
             },
             handleReset (name) {
                 this.$refs[name].resetFields();
+            },
+            handleChangedDate(date){
+                console.log(date);
+                this.formValidate.actDate = date;
+            },
+            handleChangedTime(time){
+                this.formValidate.actTime = time;
             }
         }
     }

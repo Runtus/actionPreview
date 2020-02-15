@@ -43,6 +43,10 @@
                         key : "actPlace"
                     },
                     {
+                        title : "人数上限",
+                        key : "maxPeople"
+                    },
+                    {
                         title: "发布活动的老师",
                         key : "teacherName",
                         width: 150
