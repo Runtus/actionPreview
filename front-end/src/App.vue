@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <head-bar></head-bar>
-    <dashboard v-if="this.$store.state.dashboard" class="dashboard"></dashboard>
-    <router-view />
+    <head-bar class="head-bar"></head-bar>
+    <dashboard v-if="this.$store.state.dashboard" class="dashboard" style="width:15%;"></dashboard>
+    <router-view class="box"> </router-view>
   </div>
 </template>
 
@@ -36,9 +36,17 @@
 .dashboard{
   position: absolute;
   height: 90%;
-  overflow: hidden;
-
 }
+
+.box{
+  position: absolute;
+  left: 15%;
+  width: 85%;
+  height: 100%;
+  margin: 0 auto;
+}
+
+
 </style>
 <script>
   import HeadBar from "./components/headBar";

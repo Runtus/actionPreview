@@ -1,9 +1,5 @@
 <template>
     <div id="index">
-        <div>
-            <router-link to="/login">Login</router-link>
-            <router-link to="/index">Index</router-link>
-        </div>
         <pub-action class="pub-action"></pub-action>
     </div>
 </template>
@@ -47,6 +43,10 @@
 
 <style scoped>
 .pub-action{
+    position: absolute;
+    left: 0;
+    top: 2%;
+    height: 95%;
     margin: 0 auto;
 }
 </style>
