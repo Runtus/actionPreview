@@ -1,128 +1,157 @@
 <template>
-    <div id="pubAction">
-        <div id="form">
-            <Row class="form-box">
-                <Col span="6" class="font">活动标题:</Col>
-                <Col span="17">
-                    <Input type="text" v-model="actTitle" placeholder="标题"/>
-                </Col>
-            </Row>
-            <Row class="form-box">
-                <Col>
-                    <date-picker @timeIsComing="catchTime"  @dateIsComing="catchDate"></date-picker>
-                </Col>
-            </Row>
-            <Row class="form-box">
-                <Col class="font" span="6">活动地点:</Col>
-                <Col span="17">
-                    <Input type="text" v-model="actPlace" placeholder="地点" />
-                </Col>
-            </Row>
-            <Row class="form-box" >
-                <Col class="font" span="6">紧急事件:</Col>
-                <Col span="5">
-                    <Checkbox label="是" border v-model="isSerious" >是</Checkbox>
-                </Col>
-            </Row>
-            <Row class="form-box">
-                <Col class="font" span="6">活动详情:</Col>
-                <Col span="17">
-                    <Input v-model="actInf" show-word-limit type="textarea" maxlength="200" placeholder="活动内容" :rows="10"></Input>
-                </Col>
-            </Row>
+<div class="box">
+<Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80" class="format"> 
+        <FormItem label="活动主题" prop="actTitle">
+            <Input v-model="formValidate.actTitle" placeholder="输入活动主题"></Input>
+        </FormItem>
+        <FormItem label="活动地点" prop="actPlace">
+            <Input v-model="formValidate.actPlace" placeholder="输入活动地点"></Input>
+        </FormItem>
+        
+        <FormItem label="活动日期">
             <Row>
-                <Col>
-                    <Button v-on:click="submit()" type="info">提交</Button>
+                <Col span="11">
+                    <FormItem prop="date">
+                        <DatePicker type="date" placeholder="选择日期" v-model="formValidate.actDate"></DatePicker>
+                    </FormItem>
+                </Col>
+                <Col span="2" style="text-align: center">——</Col>
+                <Col span="11">
+                    <FormItem prop="time">
+                        <!-- <TimePicker type="time" placeholder="选择时间" v-model="formValidate.time"></TimePicker> -->
+                        <TimePicker v-model="formValidate.actTime" format="HH’mm’ss" type="timerange" placement="bottom-end" placeholder="选择时间" ></TimePicker>
+                    </FormItem>
                 </Col>
             </Row>
-        </div>
-    </div>
+        </FormItem>
+        <FormItem label="人数上限" prop="maxPeople">
+            <Input v-model="formValidate.maxPeople" placeholder="输入人数上限"></Input>
+        </FormItem>
+        <FormItem label="是否加急" prop="isSerious">
+            <RadioGroup v-model="formValidate.isSerious">
+                <Radio label="true">加急事件</Radio>
+                <Radio label="false">普通事件</Radio>
+            </RadioGroup>
+        </FormItem>
+        <FormItem label="是否置顶" prop="isTop">
+            <RadioGroup v-model="formValidate.isTop">
+                <Radio label="true">是</Radio>
+                <Radio label="false">否</Radio>
+            </RadioGroup>
+        </FormItem>
+        <FormItem label="活动详情" prop="actInfo">
+            <Input v-model="formValidate.actInfo" type="textarea" :autosize="{minRows: 5,maxRows: 5}" placeholder="Enter something..."></Input>
+        </FormItem>
+        <FormItem>
+            <Button type="primary" @click="handleSubmit('formValidate')">提交</Button>
+            <Button @click="handleReset('formValidate')" style="margin-left: 8px">重置</Button>
+        </FormItem>
+    </Form>
+</div>
+    
 </template>
-
 <script>
-    import Index from "../../views/index";
-    import DatePicker from "./datePicker";
     export default {
-        name: "pubAction",
-        components: {DatePicker, Index},
-        data(){
+        name:'pubAction',
+        data () {
             return {
-                actTitle : "",
-                actDate : "",//活动日期
-                actTime : "",//活动时间
-                actPlace : "",
-                isSerious : false,
-                actInf : ""
+                formValidate: {
+                    actTitle: '',
+                    actPlace: '',
+                    actDate: '',
+                    actTime: '',
+                    isSerious:'',
+                    isTop:'',
+                    actInfo: '',
+                    maxPeople:''
+                },
+                ruleValidate: {
+                    actTitle: [
+                        { required: true, message: '活动主题不能为空', trigger: 'blur' }
+                    ],
+                    actPlace: [
+                        { required: true, message: '活动地点不能为空', trigger: 'blur' }
+                    ],
+                    actDate: [
+                        { required: true, type: 'date', message: '请选择活动日期 ', trigger: 'change' }
+                    ],
+                    isSerious: [
+                        { required: true, message: '请选择是否加急', trigger: 'change' }
+                    ],
+                    isTop: [
+                        { required: true, message: '请选择是否置顶', trigger: 'change' }
+                    ],
+                    actInfo: [
+                        { required: true, message: '请输入活动详情', trigger: 'blur' }
+                    ],
+                    maxPeople: [
+                        { required: true, message: '请输入人数上限', trigger: 'blur' }
+                    ]
+                }
             }
         },
         methods: {
-            submit(){
-                console.log(this.isSerious);
-                if(this.isSerious === true || this.isSerious === 1)
-                {
-                    this.isSerious = 1;
-                }
-                else
-                {
-                    this.isSerious = 0;
-                }
+            handleSubmit (name) {
+                var that = this;
+                this.$refs[name].validate((valid) => {
+                    if (valid) {
+                        if(that.isSerious === true || that.isSerious === 1)
+                        {
+                            that.isSerious = 1;
+                        }
+                        else
+                        {
+                            that.isSerious = 0;
+                        }
 
-                let postData ={
-                    "actTitle" : this.actTitle,
-                    "actDate" : this.actDate ,
-                    "actTime" : this.actTime,
-                    "actPlace" : this.actPlace,
-                    "isSerious" : this.isSerious,
-                    "actInf" : this.actInf
-                };//发送的数据
-                console.log(postData.isSerious);
-                this.$request.post("/pubAct",postData,{
-                    withCredentials : true,
-                    headers : {
-                        'Content-Type':'application/json;charset=utf-8' //跨域字段处处理，json格式好
+                        let postData = that.formValidate;
+
+                        // let postData ={
+                        //     "actTitle" : that.actTitle,
+                        //     "actDate" : that.actDate ,
+                        //     "actTime" : that.actTime,
+                        //     "actPlace" : that.actPlace,
+                        //     "isSerious" : that.isSerious,
+                        //     "isTop" : that.isTop,
+                        //     "maxPeople": that.maxPeople,
+                        //     "actInfo" : that.actInfo
+                        // };//发送的数据
+                        console.log(postData);
+                        that.$request.post("/pubAct",postData,{
+                            withCredentials : true,
+                            headers : {
+                                'Content-Type':'application/json;charset=utf-8' //跨域字段处处理，json格式好
+                            }
+                        }).then((result) => {
+                            console.log(result);
+                            that.$Message.success('Success!');
+                        }).catch((err) => {
+                            console.log(err);
+                        })//为了防止手贱 把这里先注释掉
+
+                    } else {
+                        this.$Message.error('Fail!');
                     }
-                }).then((result) => {
-                    console.log(result);
-                }).catch((err) => {
-                    console.log(err);
-                })//为了防止手贱 把这里先注释掉
-
+                })
             },
-            catchTime(time){
-                console.log(time);//time是一个数组
-                this.actTime = time;
-            },
-            catchDate(date){
-                console.log(date);
-                this.actDate = date;
+            handleReset (name) {
+                this.$refs[name].resetFields();
             }
-
         }
     }
 </script>
-
 <style scoped>
+    .box{
+        width: 100%;
+    }
 
-#pubAction{
-    position: relative;
-    border: 1px solid black;
-    width: 900px;
-}
-
-#form{
-    display: flex;
-    flex-direction: column;
-}
-
-.form-box{
-    display: flex;
-    flex-direction: row;
-    border: 1px solid red;
-    margin : 10px auto;
-    width:600px;
-}
-/*每段输入框提示字体*/
-.font{
-    font-size: 1.5em;
-}
+    .format{
+        margin: 0 auto;
+        position: relative;
+        width: 70%;
+        /* height: 88%; */
+        background-color: white;
+        border-radius: 15px;
+        padding: 20px;
+    }
 </style>
