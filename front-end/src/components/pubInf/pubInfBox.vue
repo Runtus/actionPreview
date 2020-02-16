@@ -191,7 +191,7 @@
         watch : { //实时搜索
             searchedInf : function () {
                 let searchedInf = this.searchedInf;
-                if(searchedInf === null)//索引框为空的时候，不用请求，直接用本地缓存值
+                if(searchedInf === "")//索引框为空的时候，不用请求，直接用本地缓存值
                 {
                     console.log(this.originPageNumber);
                     this.pageNeedData.data1 = [...this.pageNeedData.firstResData];

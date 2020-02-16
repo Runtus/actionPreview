@@ -4,7 +4,7 @@
             <img src="../assets/xr.png" >
         </Col>
         <Col>
-            {{this.$store.state.teaName }}同学,你好!
+            {{this.$store.state.teaName }}老师,你好!
         </Col>
         <Col id="font" span="5" offset="12">
             <p>后台管理系统</p>

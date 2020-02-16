@@ -4,6 +4,8 @@ import login from '../views/login.vue'
 import index from '../views/index'
 import actInf from "../views/actInf";
 import actMoreInf from "../views/actInf/studentInf";
+import actChanged from "../views/actChanged";
+import changedInf from "../views/actChanged/changedInf";
 
 Vue.use(VueRouter);
 
@@ -30,6 +32,16 @@ const routes = [
     path: '/actInf/moreInf',
     name  : "moreInf",
     component : actMoreInf
+  },
+  {
+    path : "/actChanged",
+    name : "changedInf",
+    component : actChanged
+  },
+  {
+    path : "/actChanged/changedInf",
+    name : "more-inf-for-changing",
+    component : changedInf
   },
   {
     path: '*',

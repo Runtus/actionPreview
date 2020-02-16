@@ -1,11 +1,10 @@
 'use strict'
 const express = require("express");
-const mysql = require("mysql");
 const bodyParser = require("body-parser");
 const util = require("util");
 const cookieParser = require("cookie-parser");
 const querystring = require("querystring");
-const configMysqlConnect = require('./mysql');
+
 const session = require("express-session");
 
 let app = express();
@@ -16,7 +15,12 @@ const actInf = require('./Router/actInf');
 const pubAct = require('./Router/pubAct');
 const stdInf = require('./Router/studentInf');
 const excel  = require('./excelExport/excel-for-action-Inf');
+const actChanged = require("./Router/actChanged");
+const actFormChanged = require("./Router/actFormChanged");
+const deleteInf = require("./Router/delete");
 
+
+const configMysqlConnect = require('./mysql');
 configMysqlConnect.connect();//mysql连接
 
 
@@ -55,13 +59,17 @@ app.all('*', (req, res, next) => {
     }
 });  //跨域处理
 
+
+
+
+
 app.get('/login',(req,res) => {
     number++;
     if(number === 1) //设定第一次访问
     {
         let account = req.query.aco;
         let password = req.query.psw;
-        let query = `select name from students where account=`+account +` and password=`+password;
+        let query = `select name from teachersList where account=`+account +` and password=`+password;
         configMysqlConnect.query(query ,(err,result) =>{
             if(err)
             {
@@ -88,7 +96,12 @@ app.get('/login',(req,res) => {
 app.use("/pubAct",pubAct);
 app.use("/actInf",actInf);
 app.use("/actInf/moreInf",stdInf);
+app.use("/actChanged",actChanged);
+app.use("/actChanged/formChanged",actFormChanged);
+app.use("/delete",deleteInf);
 app.use("/excel",excel);
+
+
 
 app.listen(8088,() => {
     console.log("服务已经启动");
