@@ -1,0 +1,21 @@
+<view>
+<image src='../img/2.png' class='head'></image>
+<image src='../img/bj/b.jpg' class='bj'></image>
+</view>
+<view class='box'>
+  <text id='bt'>在线预约</text>
+    
+    <view id='box-B'bindtap='appoint' data-page-id="2">
+    <image src='../img/icon/user2.png' class='icon'></image>
+    <view class='name'>
+    <text >活动预约</text>
+    </view>
+    </view>
+    <view id='box-C'bindtap='search'>
+    <image src='../img/icon/user3.png' id='icon2'></image>
+    <view class='namec' >
+    <text >预约记录查询</text>
+    </view>
+    </view>
+    
+</view>

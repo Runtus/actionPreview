@@ -1,0 +1,15 @@
+<view>
+<image src='../img/bj/b5.jpg' class='background'></image>
+<image src='../img/图片2.png' id='logo'></image>
+<text id='w1'>电子科技大学信息与软件工程学院</text>
+<text id='w2'>学生活动在线预约</text>
+
+<form>
+<input type='textarea' name="puId" value="{{puId}}" style='border-bottom:solid white 3rpx; height:50%;'placeholder='Username'placeholder-style='color:white;text-align:center;font-size:35rpx;letter-spacing:4rpx;' bindinput="inputa"></input>
+<input type='password' name="password" value="{{password}}" placeholder='password'  style="height:50%;"placeholder-style='color:white;text-align:center;letter-spacing:4rpx;font-size:35rpx;' bindinput="inputb"></input>
+<button id='login' bindtap='login'>login</button>
+</form>
+
+<text id='tip'>学生登录：用户名为学号   默认密码为123456</text>
+<text id='ad'>由一路工作室提供技术支持</text>
+</view>

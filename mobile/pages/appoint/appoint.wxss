@@ -1,0 +1,94 @@
+.bj{
+   position: fixed;
+   width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-size: 100% 100%;
+}
+
+#bt{
+  width: 60%;
+  position: absolute;
+  left: 20%;
+  top: 10%;
+  text-align: center;
+  font-size: 60rpx;
+  font-weight: 800;
+  color: rgb(15, 15, 88);
+}
+
+.head{
+  position: absolute;
+  top: 10rpx;
+  height: 180rpx;
+  width: 100%;
+}
+
+.box{
+  width: 90%;
+  position: absolute;
+  left: 5%;
+  top: 20%;
+  height: 880rpx;
+  border-radius: 40rpx;
+  background-color: rgba(243, 243, 243,0.8);
+}
+
+
+#box-B{
+  position: absolute;
+  top: 200rpx;
+  right: 0;
+  padding: 0;
+  margin: 0;
+  border-bottom: solid rgb(180, 180, 180) 1px;
+  width: 100%;
+  height: 300rpx;
+  z-index: 1;
+}
+
+#box-C{
+  position: absolute;
+  top: 500rpx;
+  margin: 0;
+  width: 100%;
+  height: 500rpx;
+  z-index: 0;
+}
+
+.icon{
+  position: relative;
+  top: 20%;
+  left: 40%;
+  width: 150rpx;
+  height: 150rpx;
+ 
+}
+
+#icon2{
+  height:150rpx;
+  width:150rpx;
+  position: relative;
+  left: 40%;
+  top: 10%;
+}
+
+.name{
+  width: 100%;
+  position: absolute;
+  bottom: 12%;
+text-align: center;
+font-size: 38rpx;
+  font-weight: 600;
+  color: rgb(15, 15, 88);
+}
+
+.namec{
+  width: 100%;
+  position: absolute;
+  top: 240rpx;
+text-align: center;
+font-size: 38rpx;
+  font-weight: 600;
+  color: rgb(15, 15, 88);
+}

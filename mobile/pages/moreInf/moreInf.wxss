@@ -1,0 +1,65 @@
+#maimBox{
+  width: 100%;
+}
+
+#mainInf{
+  width: 100%;
+  min-height: 600rpx;
+  position: relative;
+}
+
+#title{
+  height: 100rpx;
+  margin: 50rpx auto;
+  text-align: center;
+  font-size: 25px;
+}
+
+
+#flex{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+#shortInf{
+  min-width: 100rpx;
+  height: 500rpx;
+  box-shadow: 1px 1px 10px 5px #EAF7FF;
+  padding: 10rpx;
+}
+/*短消息界面布局部分*/
+.Inf{
+  text-align: center;
+  margin-top: 30px;
+}
+
+
+
+
+
+
+
+
+
+
+/*****/
+#intro{
+  width: 400rpx;
+  height: 700rpx;
+  box-shadow: 1px 1px 10px 5px #EAF7FF;
+  padding: 10rpx;
+}
+
+#subscribe{
+  width: 200rpx;
+  position: fixed;
+  bottom: 100rpx;
+  right: 40rpx;
+}
+
+
+#card{
+  max-width: 600rpx;
+  margin:0 auto;
+}

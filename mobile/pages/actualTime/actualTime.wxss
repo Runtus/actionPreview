@@ -1,0 +1,138 @@
+#mainBox{
+  width: 100%;
+  position: absolute;
+}
+
+
+
+#calender{
+  width: 100%;
+  height: 200rpx;
+  background-color: rgb(218, 245, 255);
+  position: fixed;/*相对浏览器位置不变*/
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+#mainContent{
+  margin-top: 50rpx;
+   position: relative;
+  left: 5%;
+  height: 300rpx;
+  width: 90%;
+  box-shadow: 8rpx 8rpx rgba(85, 85, 85, 0.10);
+  border-radius: 10rpx;
+  background-color: white;
+}
+
+
+.Inf{
+  margin-top: 20rpx;
+}
+
+
+#Switch{
+ margin:0 auto;
+}
+
+#Switch > switch{
+  margin-left: 10rpx;
+}
+
+#todayTime{
+  margin: 0 auto;
+  font-size: 40rpx;
+  font-weight: bold;
+}
+
+
+.box{
+ position: absolute;
+ top: 200rpx;
+ background-color: rgb(255, 255, 255);
+ width: 100%;
+}
+
+
+.event{
+  position: relative;
+  left: 3%;
+  height: 430rpx;
+  width: 94%;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+}
+
+#top{
+  position: relative;
+  top: 60rpx;
+  left: 70rpx;
+  font-size: 1rem;
+  color: red;
+  font-weight: bold;
+}
+
+
+#name{
+  position: relative;
+  top: 40rpx;
+  left: 40rpx;
+  font-size: 50rpx;
+  color: rgb(255, 255, 255);
+}
+
+#location{
+  position: relative;
+  top: 120rpx;
+  left: 70rpx;
+  font-size: 1rem;
+  color: rgb(255, 255, 255);
+}
+
+#time{
+   position: relative;
+  top: 100rpx;
+  left: 70rpx;
+  font-size: 1rem;
+  color: rgb(255, 255, 255);
+}
+
+#max_people{
+   position: relative;
+  top: 140rpx;
+  left: 70rpx;
+  font-size: 1rem;
+  color: rgb(255, 255, 255);
+}
+
+.tran{
+  position: relative;
+  top: -435rpx;
+  width: 100%;
+  height: 430rpx;
+  background-color: rgba(68, 61, 61,0.1);
+   border-radius: 20rpx;
+   box-shadow: 5px 5px 5px 5px rgba(85, 85, 85, 0.3);
+}
+
+.background{
+  height: 100%;
+  width: 100%;
+  border-radius: 20rpx;
+}
+
+
+
+.event button{
+ position: relative;
+ top: 50rpx;
+ left: 230rpx;
+  height: 80rpx;
+  width: 180rpx;
+  background-color: rgb(33, 183, 252);
+  color: white;
+  border-radius: 20rpx;
+  font-size: 30rpx;
+}

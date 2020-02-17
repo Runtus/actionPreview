@@ -1,0 +1,1 @@
+<i-button type="primary" bind:click="handleClick" i-class="button">这是一个按钮</i-button>

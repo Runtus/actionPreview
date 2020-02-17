@@ -1,0 +1,4 @@
+<view wx:for="{{usrs}}">
+  <view>{{item.name}}</view>
+  <view>{{item.pass}}</view>
+</view>

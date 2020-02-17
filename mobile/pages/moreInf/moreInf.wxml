@@ -1,0 +1,23 @@
+<view id="HeadBox">
+  <!-- <view id="mainInf">
+    <view id="title" class="Inf">{{Inf.actTitle}}</view>
+      <view id="flex">
+        <view id="shortInf">
+          <view id="time" class="Inf"><view style="text-align:center;">Time:</view>{{Inf.actTime}}</view>
+          <view id="place" class="Inf"> <view style="text-align:center;">地点:</view>{{Inf.actPlace}}</view>
+          <view id="people" class="Inf"><view style="text-align:center;">主要人物:</view>{{Inf.actPeople}}</view>
+        </view>
+        <view id="intro" ><view>简介:</view>{{Inf.actIntro}}</view>
+      </view>
+  </view> -->
+  <view id="title" class="Inf">
+    {{Inf[0].actTitle}}
+  </view>
+  <i-card title="地点: {{Inf[0].actPlace}}" extra="时间: {{Inf[0].actTime}}" style="font-size:20px;">
+    <view slot="content">{{Inf[0].actIntro}}</view>
+    <view slot="footer">发布人:{{Inf[0].teaName}}</view>
+  </i-card>
+  <button id="subscribe" bindtap="goSubscribe">预约</button>
+</view>
+
+

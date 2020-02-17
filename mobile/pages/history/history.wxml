@@ -1,0 +1,15 @@
+<view class='head'>
+  <text id='title'>预约记录查询</text>
+  <view id='tx'><image src='{{userInfo.avatarUrl}}'></image></view>
+  <text id='name'>{{userInfo.nickName}}</text>
+</view>
+<view class="bj"></view>
+<view wx:for="{{history}}" class='box'>
+<view class='content'>
+   <view class='info'><image src='../img/icon/文本文档.png'></image> <text>主题：{{item.theme}}</text> </view>
+  <view class='info'><image src='../img/icon/时钟.png'></image> <text>时间：{{item.time}}</text> </view>
+  <view class='info'><image src='../img/icon/位置标记.png'></image> <text>地点：{{item.address}}</text> </view>
+  <view class='info'><image src='../img/icon/左箭头.png'></image> <text>预约时间：{{item.aptime}}</text> </view>
+  </view>
+  <view class='line'></view>
+</view>
