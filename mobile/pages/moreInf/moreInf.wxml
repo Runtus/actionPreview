@@ -13,10 +13,9 @@
   <view id="title" class="Inf">
     {{Inf[0].actTitle}}
   </view>
-  <i-card title="地点: {{Inf[0].actPlace}}" extra="时间: {{Inf[0].actTime}}" style="font-size:20px;">
-    <view slot="content">{{Inf[0].actIntro}}</view>
-    <view slot="footer">发布人:{{Inf[0].teaName}}</view>
-  </i-card>
+  <view class="tan"> <text>发表时间: {{Inf[0].actTime}}  </text> <text>  发布人: {{Inf[0].teaName}}</text> </view>
+  <view class="tan">活动地点：{{Inf[0].actPlace}}</view>
+  <view class="content"><text decode="{{true}}">&emsp;&emsp;{{Inf[0].actIntro}}</text></view>
   <button id="subscribe" bindtap="goSubscribe">预约</button>
 </view>
 

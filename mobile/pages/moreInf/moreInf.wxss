@@ -1,5 +1,6 @@
 #maimBox{
   width: 100%;
+  background-color: rgb(191, 206, 236);
 }
 
 #mainInf{
@@ -13,6 +14,7 @@
   margin: 50rpx auto;
   text-align: center;
   font-size: 25px;
+  font-weight: bold;
 }
 
 
@@ -36,13 +38,6 @@
 
 
 
-
-
-
-
-
-
-
 /*****/
 #intro{
   width: 400rpx;
@@ -56,10 +51,29 @@
   position: fixed;
   bottom: 100rpx;
   right: 40rpx;
+  background-color: rgb(67, 180, 255);
+  color: white;
 }
 
 
 #card{
   max-width: 600rpx;
   margin:0 auto;
+}
+
+
+.tan{
+  position: relative;
+  left: 10rpx;
+  font-size: 30rpx;
+  padding: 10rpx;
+  color: rgb(105, 105, 105);
+}
+
+.content{
+  position: relative;
+  line-height: 80rpx;
+  left: 10rpx;
+  top: 10rpx;
+  font-size: 40rpx;
 }

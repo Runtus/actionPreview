@@ -1,7 +1,7 @@
 {
   "pages": [
     "pages/login/login",
-    "pages/actualTime/actualTime",
+    "pages/actualTime/actualTime",    
     "pages/exp/exp",
     "pages/appoint/appoint",
     "pages/history/history",
@@ -11,9 +11,9 @@
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle": "black"
+    "navigationBarBackgroundColor": "#FF3300",
+    "navigationBarTitleText": "活动预约系统",
+    "navigationBarTextStyle": "white"
   },
   "sitemapLocation": "sitemap.json"
 }
