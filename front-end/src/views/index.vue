@@ -11,6 +11,8 @@
         components: {PubAction},
 
         created() {
+
+            console.log(this.$store.state.dashboardWidth);
             this.$store.state.dashboard = true;
             console.log(this.$store.state.dashboard);
             this.$request.get('/pubAct',{

@@ -7,7 +7,7 @@ export default new Vuex.Store({
   state: {
     teaName : "",
     dashboard : true,
-    dahsboardWidth : 3,
+    dashboardWidth : 3,
     routerWidth : 21
   },
   mutations: {
