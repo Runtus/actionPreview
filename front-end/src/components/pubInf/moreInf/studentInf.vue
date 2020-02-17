@@ -1,22 +1,33 @@
 <template>
-    <div>
+    <div id="mainBox">
+        <div id="return">
+            <p>返回活动信息页面</p>
+        </div>
+
         <Row class="searchBox">
             <Col >
-                <Input search placeholder="搜索活动信息（请输入活动标题)" v-model="searchedInf" />
+                <Input search placeholder="搜索学生(请输入学生学号或者学生名字)" v-model="searchedInf" />
             </Col>
         </Row>
 
         <Row id="studentInf" :style="{'height': boxHeight}">
-            <Col >
+            <Col class="col-1">
                 <div ref="table">
-                <Table border :columns="columnConfig" :data="studentList" class="table" ref="selection" ></Table>
+                    <Table border :columns="columnConfig" :data="studentList" class="table" ref="selection" ></Table>
                 </div>
             </Col>
+
             <Col class="col-2">
                 <Button type="primary" size="large" @click="exportData"><Icon type="ios-download-outline"></Icon>导出所有学生信息</Button>
             </Col>
             <Col class="col-3">
                 <Page :total="pageNum" show-elevator @on-change="currentPage"/>
+            </Col>
+            <Col class="col-4">
+                <Button type="default" size="large" @click="back">
+                    <Icon type="ios-arrow-back" size="20" ></Icon>
+                    回到信息展示页面
+                </Button>
             </Col>
         </Row>
     </div>
@@ -71,6 +82,11 @@
 
             },
 
+            back(){
+                this.$router.push("/actInf")
+            }
+            ,
+
             computingPages(totalPages) {
                 if (totalPages <= 5) //暂时先用三来代替
                 {
@@ -120,19 +136,27 @@
             // console.log(screenHeight);
 
             this.columnConfig[3].width = screenWidth * 0.25;//设置申请理由表格宽度
-            this.boxHeight = screenHeight * 0.8 + "px"; //设置本组件的高度
+            this.boxHeight = screenHeight * 0.57 + "px"; //设置本组件的高度
 
         },
         mounted() {
             //下面是表格分页的设置 包括学生名单和页数
             setTimeout(() => {
                 //下面是表格分页的设置 包括学生名单和页数
-                this.studentList = this.studentData.studentInf;
-                this.configData.originStudentList = [...this.studentList];//拷贝一份
-                this.pageNum = this.computingPages(this.studentData.studentsNum);//计算页数
-                this.configData.originPageNum = this.pageNum; //拷贝一份
-
-                this.actionId = this.studentData.studentInf[0].actionId;//设置活动Id，需要查询
+                if(this.studentData.studentInf.length === 0)//又犯了一个错误，数组不能直接判等。
+                {
+                    this.studentList = [];
+                    this.configData.originStudentList = [];//拷贝一份
+                    this.pageNum = 10 ;//默认10
+                    this.configData.originPageNum = this.pageNum; //拷贝一份
+                }
+                else{
+                    this.studentList = this.studentData.studentInf;
+                    this.configData.originStudentList = [...this.studentList];//拷贝一份
+                    this.pageNum = this.computingPages(this.studentData.studentsNum);//计算页数
+                    this.configData.originPageNum = this.pageNum; //拷贝一份
+                    this.actionId = this.studentData.studentInf[0].actionId;//设置活动Id，需要查询
+                }
 
             }, 500); //设置时差，防止赋值失败。因为请求源是在父组件里
 
@@ -169,11 +193,26 @@
 </script>
 
 <style scoped>
+#mainBox{
+    position: relative;
+}
+
+#return{
+    position: absolute;
+    top:10px;
+}
 #studentInf{
-    border: 1px solid red;
+    border: 2px solid #EFEFEF;
+    box-shadow: 2px 1px 5px 1px #EFEFEF;
     min-width: 25%;
     max-width: 60%;
     position: relative;
+}
+
+.searchBox{
+    width: 60%;
+    margin-bottom: 2%;
+    /*border: 1px solid black;*/
 }
 
 .table {
@@ -190,5 +229,18 @@
     position: absolute;
     bottom : 10px;
     left: 4%;
+}
+
+.col-4{
+    position: absolute;
+    right: -40%;
+    top : 0%;
+    font-size: 20px;
+    line-height: 30px;
+    border: 1px solid #C9C9C9;
+    background-color: #EFEFEF;
+    border-radius: 10px;
+    box-shadow: 2px 2px 4px 1px #C9C9C9;
+
 }
 </style>

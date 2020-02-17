@@ -68,7 +68,8 @@
 
 <style scoped>
 #FirstBox{
-    border: 1px solid black;
+    border: 1px solid #969696;
+    box-shadow: 2px 1px 3px 1px #969696;
     border-radius: 30px;
     width: 400px;
     height: 250px;
@@ -94,7 +95,7 @@
     font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
     font-size: 24px;
     font-weight: bold;
-    color: aliceblue;
+    color: black;
 }
 
 

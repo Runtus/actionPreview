@@ -1,5 +1,5 @@
 <template>
-        <Menu :theme="theme3"  class="Menu"  :active-name="choosenMenu" >
+        <Menu :theme="theme3" :style="{height : clientHeight-100 + 'px'}" class="Menu" mode="vertical" ref="dashboard"  :active-name="choosenMenu" width="auto">
             <MenuGroup title="内容管理">
                 <MenuItem name="1" to="/index">
                     <Icon type="md-document" />
@@ -13,9 +13,12 @@
                     <Icon type="md-heart"  />
                     修改/删除活动
                 </MenuItem>
-
             </MenuGroup>
+            <div id="logOut">
+                <Icon type="ios-power" size="20"/><a @click="logOut">登出</a>
+            </div>
         </Menu>
+
 </template>
 
 <script>
@@ -23,7 +26,8 @@
         name: "dashboard",
         data(){
             return {
-                theme3 : 'dark',
+                clientHeight : "",
+                theme3 : 'light',
                 menuList : [],
                 choosenMenu : "1",
                 routerList : {
@@ -44,10 +48,16 @@
                     }
                 }
 
+            },
+            logOut(){
+                this.$Message.success("退出账号成功!");//全局提醒
+                this.$router.push("/login");
             }
         },
         created() {
             this.highLightChange();
+            this.clientHeight = document.body.clientHeight;
+
         }
     }
 </script>
@@ -55,6 +65,14 @@
 <style scoped>
 
 .Menu{
-    /*border: 1px solid red;*/
+    border: 1px solid red;
+
+}
+
+#logOut{
+    position: absolute;
+    left: 40%;
+    bottom: 20%;
+    font-size: 15px;
 }
 </style>

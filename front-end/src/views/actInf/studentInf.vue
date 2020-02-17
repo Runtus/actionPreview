@@ -42,9 +42,13 @@
             });
 
             this.$store.state.dashboard = false;//dashboard板设置
+            this.$store.state.routerWidth = 24;
+            this.$store.state.dashboardWidth = 0;
         },
         beforeDestroy() {
             this.$store.state.dashboard = true;
+            this.$store.state.routerWidth = 21;
+            this.$store.state.dashboardWidth = 3;
         }
     }
 </script>
@@ -52,7 +56,13 @@
 <style scoped>
 .actMoreInf{
     position: relative;
-    border: 1px solid red;
+    /*border: 1px solid red;*/
+    height: 70%;
+    background-color: white;
+    margin-top:2%;
+    border: 1px solid  #C9C9C9;
+    border-radius: 20px;
+    box-shadow: 2px 2px 5px 2px  #C9C9C9;
 }
 
 .col-1{

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="mainBox">
         <Row id="actChanged">
             <Col>
                 <Input search placeholder="输入想更改的消息" v-model="searchedInf"/>
@@ -15,8 +15,8 @@
                 </Table>
             </Col>
         </Row>
-        <Row>
-            <Col  >
+        <Row class="pageRouter">
+            <Col >
                 <Page :total="pageConfig.pageNum" show-elevator  @on-change="currentPage"/>
             </Col>
         </Row>
@@ -245,5 +245,17 @@
 </script>
 
 <style scoped>
+#mainBox{
+    position: relative;
+    height: 100%;
+}
 
+.pageRouter{
+    position: absolute;
+    width: 100%;
+    bottom: 3%;
+    box-shadow: 1px 1px 1px #EFEFEF;
+    border:1px solid #EFEFEF;
+    border-radius: 2px;
+}
 </style>

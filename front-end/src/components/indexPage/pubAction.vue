@@ -1,5 +1,4 @@
 <template>
-<div class="box">
 <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80" class="format"> 
         <FormItem label="活动主题" prop="actTitle">
             <Input v-model="formValidate.actTitle" placeholder="输入活动主题"></Input>
@@ -47,7 +46,6 @@
             <Button @click="handleReset('formValidate')" style="margin-left: 8px">重置</Button>
         </FormItem>
     </Form>
-</div>
     
 </template>
 <script>
@@ -148,14 +146,14 @@
     }
 </script>
 <style scoped>
-    .box{
-        width: 100%;
-    }
+
 
     .format{
-        margin: 0 auto;
+        /*border: 1px solid red;*/
+        margin-right: auto;
+        margin-left: auto;
         position: relative;
-        width: 70%;
+        width: 90%;
         /* height: 88%; */
         background-color: white;
         border-radius: 15px;

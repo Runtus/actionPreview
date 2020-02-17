@@ -6,7 +6,9 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     teaName : "",
-    dashboard : true
+    dashboard : true,
+    dahsboardWidth : 3,
+    routerWidth : 21
   },
   mutations: {
   },

@@ -1,5 +1,5 @@
 <template>
-    <div >
+    <div id="the-main-box">
         <Row id="searchBox">
             <Input search placeholder="搜索活动信息（请输入活动标题)" v-model="searchedInf" />
         </Row>
@@ -227,13 +227,30 @@
 </script>
 
 <style scoped>
+#the-main-box{
+    border-radius: 10px 10px;
+    border: 1px solid #C9C9C9;
+    box-shadow: 5px 5px 5px 5px #C9C9C9;
+    height: 80%;
+    position: relative;
+    background-color: white;
+}
+
 #pubInfBox{
-    border: 1px solid red;
+    /*border: 1px solid red;*/
 
 }
 
 .NavigationBox{
-    border:1px solid red;
+
     width: 100%;
+    position: absolute;
+    bottom: 3%;
+    border-radius: 10px;
+    box-shadow: 2px 2px 1px 1px #EFEFEF;
+    border:1px solid #EFEFEF;
 }
+
+
+
 </style>

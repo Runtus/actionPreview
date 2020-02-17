@@ -43,10 +43,14 @@
 
 <style scoped>
 .pub-action{
-    position: absolute;
-    left: 0;
-    top: 2%;
-    height: 95%;
+    /*position: absolute;*/
+
     margin: 0 auto;
+}
+
+.pub-action{
+    margin-top:5%;
+    border: 1px solid #C9C9C9;
+    box-shadow: 5px 5px 5px 5px #C9C9C9;
 }
 </style>

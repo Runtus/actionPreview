@@ -15,15 +15,13 @@
             }
         },
         created() {
-
-
-
-
-
-
+            this.$store.state.routerWidth = 24;
+            this.$store.state.dashboardWidth = 0;
             this.$store.state.dashboard = false;
         },
         beforeDestroy() {
+            this.$store.state.routerWidth = 21;
+            this.$store.state.dashboardWidth = 3;
             this.$store.state.dashboard = true; //防止dashboard出现
         }
     }

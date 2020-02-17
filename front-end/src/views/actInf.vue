@@ -17,12 +17,12 @@
 <style scoped>
 #actInf{
     height: 100%;
+    /*border: 1px solid black;*/
+    background-color:  #EFEFEF;
 }
 
 
-.overBox{
-    margin-left: 240px;
-}
+
 
 .special{
     margin-top: 3%;

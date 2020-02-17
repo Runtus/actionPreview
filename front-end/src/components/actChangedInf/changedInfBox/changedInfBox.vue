@@ -1,5 +1,11 @@
 <template>
     <div class="box">
+        <div id="return">
+            <Button type="default" size="large" @click="back">
+                <Icon type="ios-arrow-back" size="20" ></Icon>
+                回到信息展示页面
+            </Button>
+        </div>
         <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80" class="format">
             <FormItem label="活动主题" prop="actTitle">
                 <Input v-model="formValidate.actTitle" placeholder="输入活动主题"></Input>
@@ -149,6 +155,9 @@
             },
             handleChangedTime(time){
                 this.changedTime = time;
+            },
+            back(){
+                this.$router.push("/actChanged");
             }
         },
         created() {
@@ -218,13 +227,21 @@
         width: 100%;
     }
 
+    #return{
+        position: absolute;
+        left: 1%;
+        box-shadow: 3px 3px 4px 1px #C9C9C9;
+    }
     .format{
-        margin: 0 auto;
+        border : 1px solid #EFEFEF;
+        box-shadow: 3px 3px 4px 1px #C9C9C9;
+        margin: 4% auto 0;
         position: relative;
         width: 70%;
         /* height: 88%; */
         background-color: white;
         border-radius: 15px;
         padding: 20px;
+
     }
 </style>

@@ -10,9 +10,19 @@
     export default {
         name: "login",
         components: {HeadBar, loginBox}, //组件
-        beforeMount() {
-                this.$store.state.dashboard = false;
-        }
+        created() {
+            console.log(this.$route.name );
+            if(this.$route.name === "login") //判断，如果是首页的话，就全沾满
+            {
+                this.$store.state.routerWidth = 24;
+                this.$store.state.dashboardWidth = 0;
+            }
+            this.$store.state.dashboard = false;
+        },
+        beforeDestroy() {
+            this.$store.state.routerWidth = 21;
+            this.$store.state.dashboardWidth = 3;
+        },
 
     }
 
@@ -20,11 +30,13 @@
 
 <style scoped>
 #login{
+    width: 100%;
+    height: 100%;
     position: relative;
 }
 
 .login-box{
-    margin: 13% auto;
-
+    margin: 14% auto 20%;
+    background-color: white;
 }
 </style>
