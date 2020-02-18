@@ -8,7 +8,7 @@ import actChanged from "../views/actChanged";
 import changedInf from "../views/actChanged/changedInf";
 import storeData from "../store/index"
 
-Vue.use(VueRouter);
+if (!window.VueRouter) {Vue.use(VueRouter);}
 
 const routes = [
 
@@ -55,7 +55,7 @@ const routes = [
 
 const router = new VueRouter({
   mode: 'history',
-  base: process.env.BASE_URL,
+  base: process.env.BASE_URL ,
   routes
 });
 

@@ -11,7 +11,6 @@
         components: {PubAction},
 
         created() {
-            debugger
             this.$store.state.pageConfig.xxl_size_logo = 7;
             this.$store.state.pageConfig.xl_size_logo = 6;
             this.$store.state.pageConfig.xxl_size_title = 9;

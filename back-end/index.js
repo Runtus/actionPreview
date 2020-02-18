@@ -70,14 +70,14 @@ app.get('/login',(req,res) => {
     {
         let account = req.query.aco;
         let password = req.query.psw;
-        let query = `select name from teachersList where account=`+account +` and password=`+password;
+        let query = `select name from teachersList where account='${account}' and password='${password}';`;
         configMysqlConnect.query(query ,(err,result) =>{
             if(err)
             {
                 console.log("数据库有错");
                 res.json([{"code": "404" }]);
             }
-            else if(result === "")
+            else if(result.length === 0)
             {
                 res.json({"status":"403","message":"登录失败"})
             }
@@ -110,6 +110,6 @@ app.use("/excel",excel);
 
 
 
-app.listen(8088,() => {
+app.listen(8000,() => {
     console.log("服务已经启动");
 });

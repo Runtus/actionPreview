@@ -82,7 +82,7 @@
 <style scoped>
 
 .Menu{
-    border: 1px solid red;
+
 
 }
 

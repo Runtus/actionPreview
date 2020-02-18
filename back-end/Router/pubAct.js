@@ -67,7 +67,7 @@ router.post("/",(req,res) => {
     
         let query = `insert into actionsTotal 
                     (actTitle , actDate, actPlace, isSerious, actInf , teacherName , actionId, isTop, maxPeople) values 
-                    (${actTitle},${actDate},${actPlace},${isSerious},${actInf},'白龙飞',${newActId},${isTop},${maxPeople});` ;//规定参数
+                    (${actTitle},${actDate},${actPlace},${isSerious},${actInf},'${req.session.teacherName}',${newActId},${isTop},${maxPeople});` ;//规定参数
 
         configMysqlConnect.query(query,(err,result) => {
             if(err)
