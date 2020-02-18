@@ -6,6 +6,7 @@ import actInf from "../views/actInf";
 import actMoreInf from "../views/actInf/studentInf";
 import actChanged from "../views/actChanged";
 import changedInf from "../views/actChanged/changedInf";
+import storeData from "../store/index"
 
 Vue.use(VueRouter);
 
@@ -50,10 +51,14 @@ const routes = [
 
 ];
 
+
+
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
 });
+
+
 
 export default router

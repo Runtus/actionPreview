@@ -138,7 +138,7 @@
                     }).then(result => {
                         if (result.data.status === "fail")
                         {
-                            alert("登录失效，请重新登录!");
+                            this.$Message.warning("登录已经失效，请重新登录!");
                             this.$router.push("/login");
                         }
                         else
@@ -175,7 +175,7 @@
                 {
                     if(result.data.status === 'fail' && result.data.DBerror === 0)//登录过期
                     {
-                        alert("登录已经过期，请重新登录!");
+                        this.$Message.warning("登录已经失效，请重新登录!");
                         this.$router.push("/login");
                     }
                     else //数据库错误
@@ -219,7 +219,7 @@
                             {
                                 if (result.data.DBerror === 0)
                                 {
-                                    alert("登录失效，请重新登录!");
+                                    this.$Message.warning("登录已经失效，请重新登录!");
                                     this.$router.push("/login")
                                 }
                                 else

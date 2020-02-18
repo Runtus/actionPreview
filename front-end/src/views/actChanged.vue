@@ -8,6 +8,14 @@
     import ActInfChangedBox from "../components/actChangedInf/act-inf-changed-box";
     export default {
         name: "actChanged",
+        created() {
+            this.$store.state.pageConfig.xxl_size_logo = 7;
+            this.$store.state.pageConfig.xl_size_logo = 6;
+            this.$store.state.pageConfig.xxl_size_title = 9;
+            this.$store.state.pageConfig.xl_size_title = 6;
+            this.$store.state.pageConfig.xxl_offset_title = 0;
+            this.$store.state.pageConfig.xl_offset_title  = 0;
+        },
         components: {ActInfChangedBox}
     }
 </script>

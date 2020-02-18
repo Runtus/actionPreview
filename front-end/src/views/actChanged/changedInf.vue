@@ -15,6 +15,15 @@
             }
         },
         created() {
+            {
+
+                this.$store.state.pageConfig.xxl_size_logo = 7;
+                this.$store.state.pageConfig.xl_size_logo = 6;
+                this.$store.state.pageConfig.xxl_size_title = 9;
+                this.$store.state.pageConfig.xl_size_title = 6;
+                this.$store.state.pageConfig.xxl_offset_title = 0;
+                this.$store.state.pageConfig.xl_offset_title  = 0;
+            }
             this.$store.state.routerWidth = 24;
             this.$store.state.dashboardWidth = 0;
             this.$store.state.dashboard = false;

@@ -11,7 +11,13 @@
         components: {PubAction},
 
         created() {
-
+            debugger
+            this.$store.state.pageConfig.xxl_size_logo = 7;
+            this.$store.state.pageConfig.xl_size_logo = 6;
+            this.$store.state.pageConfig.xxl_size_title = 9;
+            this.$store.state.pageConfig.xl_size_title = 6;
+            this.$store.state.pageConfig.xxl_offset_title = 0;
+            this.$store.state.pageConfig.xl_offset_title  = 0;
             console.log(this.$store.state.dashboardWidth);
             this.$store.state.dashboard = true;
             console.log(this.$store.state.dashboard);
@@ -29,7 +35,7 @@
                     }
                     else
                     {
-                        alert("登录失效，请重新登录");
+                        this.$Message.info("请重新登录!");
                         this.$router.push("/login");
                     }
 

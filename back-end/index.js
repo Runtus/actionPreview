@@ -18,6 +18,7 @@ const excel  = require('./excelExport/excel-for-action-Inf');
 const actChanged = require("./Router/actChanged");
 const actFormChanged = require("./Router/actFormChanged");
 const deleteInf = require("./Router/delete");
+const logout = require("./logout");
 
 
 const configMysqlConnect = require('./mysql');
@@ -76,14 +77,18 @@ app.get('/login',(req,res) => {
                 console.log("数据库有错");
                 res.json([{"code": "404" }]);
             }
-            else(result !== "")
+            else if(result === "")
             {
+                res.json({"status":"403","message":"登录失败"})
+            }
+            else{
                 console.log(req.cookies);
                 console.log(result[0].name)
                 req.session.teacherName = result[0].name;
                 console.log(req.session);
                 res.json(result);
             }
+    
         })
     }
     else{
@@ -99,7 +104,9 @@ app.use("/actInf/moreInf",stdInf);
 app.use("/actChanged",actChanged);
 app.use("/actChanged/formChanged",actFormChanged);
 app.use("/delete",deleteInf);
+app.use("/logout",logout);
 app.use("/excel",excel);
+
 
 
 

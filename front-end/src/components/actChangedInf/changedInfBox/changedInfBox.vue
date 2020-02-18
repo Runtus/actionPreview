@@ -171,7 +171,7 @@
                 if(result.data.status)
                 {
 
-                    alert("登录已失效，请重新登录！");
+                    this.$Message.warning("登录已经失效，请重新登录!");
                     this.$router.push("/login");
                 }
                 else if (result.data.database)

@@ -8,7 +8,7 @@ const router = express.Router();
 // 路由: "/actInf"
 router.get('/',(req,res,next) => {  
     //获取对应活动数
-    console.log(req.session.teacherName);
+    console.log(req.session);
     let resData = {
         actionNumber : 0,
         data : [] ,

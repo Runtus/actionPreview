@@ -35,6 +35,7 @@
                     "actInf" : "2",
                     "changedInf" : "3"
                 }
+
             }
         },
         methods:{
@@ -50,15 +51,31 @@
 
             },
             logOut(){
-                this.$Message.success("退出账号成功!");//全局提醒
-                this.$router.push("/login");
-            }
+                this.$request.get("/logout")
+                .then(result => {
+                    if(result.data.status === "session-empty")
+                    {
+                        this.$Message.warning("账号已失效，即将跳转登录界面");
+                    }
+                    else
+                    {
+                        this.$Message.success("退出账号成功!");//全局提醒
+                    }
+                    this.$store.state.teaName = "";
+                    this.$router.push("/login");
+                }).catch(err => {
+                    console.log(err);
+                });
+            },
+
+
         },
         created() {
             this.highLightChange();
             this.clientHeight = document.body.clientHeight;
 
         }
+
     }
 </script>
 

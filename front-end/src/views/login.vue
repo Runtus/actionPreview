@@ -10,19 +10,28 @@
     export default {
         name: "login",
         components: {HeadBar, loginBox}, //组件
-        created() {
-            console.log(this.$route.name );
-            if(this.$route.name === "login") //判断，如果是首页的话，就全沾满
+        created() {//全局变量配置
             {
+                this.$store.state.teaName = "";//这里设置空只是为了清零，只要请求，全局变量就可以设置
+                this.$store.state.pageConfig.xxl_size_logo = 7;
+                this.$store.state.pageConfig.xxl_size_title = 9;
+                this.$store.state.pageConfig.xxl_offset_title = 8;
+                this.$store.state.pageConfig.xl_size_logo = 5;
+                this.$store.state.pageConfig.xl_size_title = 7;
+                this.$store.state.pageConfig.xl_offset_title = 10;
                 this.$store.state.routerWidth = 24;
                 this.$store.state.dashboardWidth = 0;
+                this.$store.state.dashboard = false;
+                console.log(this.$store.state.dashboard);
             }
-            this.$store.state.dashboard = false;
+
+
         },
         beforeDestroy() {
             this.$store.state.routerWidth = 21;
             this.$store.state.dashboardWidth = 3;
-        },
+            console.log(this.$store.state.pageConfig);
+        }
 
     }
 
