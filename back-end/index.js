@@ -45,7 +45,7 @@ var number = 0;
 app.all('*', (req, res, next) => { 
     res.header("Content-Type", "application/json;charset=utf-8"); 
     res.header("Access-Control-Allow-Origin", req.headers.origin);  //cookie 跨域
-    res.header("Access-Control-Allow-Headers", "X-Requested-With,content-type");  //允许接受content-type头部的跨域。
+    res.header("Access-Control-Allow-Headers", "X-Requested-With,content-type,responseType");  //允许接受content-type头部的跨域。
     res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");  
     res.header("X-Powered-By",' 3.2.1');  
     res.header("Access-Control-Allow-Credentials",true); //cookie跨域

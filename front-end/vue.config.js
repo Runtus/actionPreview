@@ -1,4 +1,7 @@
 module.exports = {
+    devServer : {
+        port : 8800
+    },
     lintOnSave: false ,  // 取消 eslint 验证
     publicPath : process.env.NODE_ENV === "production" ? "/" : "/", //部署应用包时的基本 URL
     indexPath: "index.html",
@@ -27,7 +30,7 @@ const cdn = {
     externals: {
         vue: 'Vue',
         // vuex: 'Vuex',
-        'vue-router': 'VueRouter',
+        'vue-router': 'VueRouter'
         // 'axios' : 'axios',
     },
     // cdn的css链接
@@ -36,7 +39,7 @@ const cdn = {
     js: [
         'https://cdn.staticfile.org/vue/2.6.10/vue.min.js',
         // 'http://lib.baomitu.com/vuex/3.1.2/vuex.esm.browser.js',
-        'https://cdn.staticfile.org/vue-router/3.0.3/vue-router.min.js',
+        'https://cdn.staticfile.org/vue-router/3.0.3/vue-router.min.js'
         // 'https://unpkg.com/axios/dist/axios.min.js',
 
     ]

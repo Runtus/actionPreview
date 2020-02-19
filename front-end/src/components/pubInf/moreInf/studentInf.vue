@@ -78,7 +78,27 @@
         },
         methods: {
             exportData() {
+
                 //这里进行请求，导出必须从后端导出
+                this.$request.get("/excel/excel-students-list",{
+                    params : {
+                        actionId : this.actionId
+                    }
+                }).
+                    then(result => {
+                    if(result.data.status === "empty")
+                    {
+                        this.$Message.warning("抱歉，无数据可以导出!");
+                    }
+                    else
+                    {
+                        window.location.href=`http://118.31.105.159:3389/excel/excel-students-list?actionId=${this.actionId}`;
+                        this.$Message.success("请等待下载!");
+                    }
+                }).catch(err => {
+                    console.log(err);
+                    this.$Message.warning("数据为空无法找到!");
+                })
 
             },
 

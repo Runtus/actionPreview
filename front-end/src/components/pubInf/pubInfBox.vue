@@ -139,11 +139,38 @@
 
             //Excel表格导出
             exportData(){
-                this.$request.get("/excel/action-Inf")
+
+
+                // window.location.href="http://127.0.0.1:8000/excel/excel-actions-list"
+                this.$request.get("/excel/excel-actions-list",{
+                    headers : {
+                        responseType : 'blob'
+                    }
+                })
                     .then((result) => {
-                        console.log(`处理结果${result}`);
+                        if (result.data.status === "empty")
+                        {
+                            this.$Message.info("抱歉，无数据，无法导出.");
+                        }
+                        else
+                        {
+                            //获得对应的下载
+                            window.location.href="http://118.31.105.159:3389/excel/excel-actions-list";
+                            // let blob = new Blob([result.data],{type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8'});
+                            // let download = document.createElement('a');
+                            // let href = window.URL.createObjectURL(blob);
+                            // let date = new Date();
+                            // download.href = href;
+                            // download.download = `${date.getMonth()}月${date.getDate()}日${date.getHours()}时的活动名单.xlsx`;
+                            // document.body.appendChild(download);
+                            // download.click(); //点击下载
+                            // document.body.removeChild(download); //下载完成移除元素
+                            // window.URL.revokeObjectURL(href); //释放掉blob对象
+                            this.$Message.success("请等待下载");
+                        }
                     }).catch((err) => {
                     console.log(err);
+                    this.$Message.warning("出错");
                 })
             },
 
