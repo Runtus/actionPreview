@@ -1,12 +1,17 @@
 {
   "pages": [
     "pages/login/login",
-    "pages/actualTime/actualTime",    
-    "pages/exp/exp",
-    "pages/appoint/appoint",
-    "pages/history/history",
+    "pages/test/test",
     "pages/moreInf/moreInf",
-    "pages/test/test"
+    "pages/history/history",
+    "pages/appoint/appoint",
+    "pages/exp/exp",
+    "pages/actualTime/actualTime"
+    
+    
+    
+    
+    
     
   ],
   "window": {
