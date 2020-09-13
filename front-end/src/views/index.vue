@@ -9,7 +9,6 @@
     export default {
         name: "index",
         components: {PubAction},
-
         created() {
             this.$store.state.pageConfig.xxl_size_logo = 7;
             this.$store.state.pageConfig.xl_size_logo = 6;
@@ -26,7 +25,6 @@
                 }
             }).then(
                 (result) => {
-
                     if(result.data.status === "success")
                     {
                         console.log("你好"+result.data.teacherName);

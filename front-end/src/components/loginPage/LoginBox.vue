@@ -29,25 +29,20 @@
         methods:{
             Login(){
                 console.log(this.account + this.password);
-                this.$request.get("/login",{
-                    params : {
-                        aco : this.account ,
-                        psw : this.password
-                    },
+                this.$request.post(`/teacher/login?account=${this.account}&password=${this.password}`,{
                     withCredentials: true, //cookie
                     headers : {
-
+                        "Content-Type":"application/x-www-form-urlencoded"
                     }
                 })
                 .then(res => {
-                    console.log(res.data);
                     let objOfName = res.data;
-                    if (objOfName.length !== 0)
+                    console.log(objOfName)
+                    if (objOfName.code === 0)
                     {
-                        console.log(objOfName[0].name);
-                        this.$store.state.teaName = objOfName[0].name;
-                        console.log(res);
-                        alert(objOfName[0].name + ", 您已经登陆成功!");
+                        this.$store.state.teaName = objOfName.data.teachername;
+                        alert(objOfName.data.teachername + ", 您已经登陆成功!");
+                        // sessionStorage.setItem("token",objOfName.data.token);
                         this.$router.push('/index');
                     }
                     else{
@@ -56,6 +51,7 @@
                 }).catch(
                     (err) => {
                         console.log(err);
+                        alert("账号密码错误，请重试!");
                     }
                 )
             }

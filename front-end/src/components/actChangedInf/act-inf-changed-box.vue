@@ -39,19 +39,19 @@
                     columns : [
                         {
                            title : "活动标题",
-                           key : "actTitle"
+                           key : "acttitle"
                         },
                         {
                             title: "活动时间",
-                            key : "actDate"
+                            key : "actdate"
                         },
                         {
                             title: "活动地点",
-                            key : "actPlace"
+                            key : "actplace"
                         },
                         {
                             title : "人数上限",
-                            key : "maxPeople"
+                            key : "maxpeople"
                         },
                         {
                             title: "活动详情",
@@ -68,7 +68,8 @@
                 pageConfig : {
                     pageNum : 10, //初始页面设置
                     pageSize : 5
-                }
+                },
+                teachername : "白龙飞"
 
             }
         },
@@ -79,13 +80,9 @@
             },
 
             deleteInf(index){ //删除信息
-                console.log(this.tableConfig.tableData[index].actionId);
-                this.$request.get("/delete",{
-                    params : {
-                        actionId : this.tableConfig.tableData[index].actionId,
-                        currentPage : this.choosenPage
-                    }
-                }).then(result => {
+                console.log(this.tableConfig.tableData[index].actionid);
+                let actionId = this.tableConfig.tableData[index].actionid;
+                this.$request.get(`/activity/teacher/delete?actionId=${actionId}`).then(result => {
                     if(result.data.status === "fail")
                     {
                         alert("登录失效，请重新登录!");
@@ -97,8 +94,11 @@
                     }
                     else
                     {
-                        this.tableConfig.tableData = result.data;
+                        // this.tableConfig.tableData = result.data;
+
+                        console.log(result.data);
                         alert("删除成功!");
+                        location.reload();
                     }
 
                 }).catch(err => {
@@ -108,14 +108,12 @@
 
             currentPage(page){ //页面改变时响应
                 this.choosenPage = page;
-
+                let start = (page - 1) * this.pageConfig.pageSize + 1;
+                console.log(start)
                 console.log(`当前页数为${page}`);
                 if (this.searchedInf === "")//为空的时候，正常索引
                 {
-                    this.$request.get("/actChanged/page",{
-                        params : {
-                            currentPage : page
-                        }
+                    this.$request.get(`/activity/teacher?id=${this.teachername}&size=${this.pageConfig.pageSize}&start=${start}`,{
                     }).then(result => {
                         if(result.data.status === "fail")
                         {
@@ -124,7 +122,8 @@
                         }
                         else
                         {
-                            this.tableConfig.tableData = result.data.DBdata;
+                            console.log(result);
+                            this.tableConfig.tableData = result.data.data.actlist;
                         }
                     })
                 }
@@ -169,9 +168,9 @@
         },
 
         created() {
-            this.$request.get("/actChanged")
+            this.$request.get(`/activity/teacher?id=${this.teachername}&size=${this.pageConfig.pageSize}&start=1`)
             .then(result => {
-                if(result.data.status === "fail")//jsonFailData后端定义
+                if(result.data.message === "fail")//jsonFailData后端定义
                 {
                     if(result.data.status === 'fail' && result.data.DBerror === 0)//登录过期
                     {
@@ -186,11 +185,11 @@
                 else
                 {
                     console.log(result.data);
-                    this.pageConfig.pageNum = this.computingPages(result.data.DBdataTotal);
-                    this.responseData.originTableInfList = result.data.DBdata;//响应信息做备份
+                    this.pageConfig.pageNum = this.computingPages(result.data.data.count);
+                    this.responseData.originTableInfList = result.data.data.actlist;//响应信息做备份
                     this.tableConfig.tableData = [...this.responseData.originTableInfList];
                     this.responseData.originPage = this.pageConfig.pageNum;//页面做备份
-                    this.$store.state.teaName = result.data.sessionTeacher;
+                    // this.$store.state.teaName = result.data.sessionTeacher;
                 }
 
             }).catch((err) => {

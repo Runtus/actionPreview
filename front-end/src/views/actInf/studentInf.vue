@@ -14,7 +14,8 @@
         components: {StudentInf},
         data(){
             return {
-                studentInf : {}
+                studentInf : {},
+                pageSize : 5
             }
         },
         created() {
@@ -28,11 +29,7 @@
             }
             console.log(this.$route.query.actId);
             let actionId = this.$route.query.actId;
-            this.$request.get("/actInf/moreInf",{
-                params : {
-                    actionId : actionId
-                }
-            }).then(result => {
+            this.$request.get(`/stuinfo?id=${actionId}&size=${this.pageSize}&start=1`).then(result => {
                 if(result.data.status === "fail")
                 {
                     this.$Message.warning("登录已经失效，请重新登录!");
@@ -41,8 +38,8 @@
                 else
                 {
                     console.log(result.data);
-                    this.studentInf = result.data; //设置学生信息
-                    this.$store.state.teaName = result.data.teacherName;
+                    this.studentInf = result.data.data.stulist; //设置学生信息
+                    // this.$store.state.teaName = result.data.teacherName;
                 }
 
             }).catch(err => {

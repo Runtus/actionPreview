@@ -32,23 +32,23 @@
                 columns : [
                     {
                         title : "活动标题",
-                        key : "actTitle"
+                        key : "acttitle"
                     },
                     {
                         title: "活动时间",
-                        key : "actDate"
+                        key : "actdate"
                     },
                     {
                         title: "活动地点",
-                        key : "actPlace"
+                        key : "actplace"
                     },
                     {
                         title : "人数上限",
-                        key : "maxPeople"
+                        key : "maxpeople"
                     },
                     {
                         title: "发布活动的老师",
-                        key : "teacherName",
+                        key : "teachername",
                         width: 150
                     },
                     {
@@ -70,6 +70,7 @@
                 },
 
                 pageNum : 0,
+                pageSize : 5,
                 currentPageVar : 1,
                 index : 0,
                 searchedInf : "" ,//搜索框的数值
@@ -82,21 +83,22 @@
             /*****必要函数信息*****/
             //日期规格化函数
             normalizingDate(middleData) {
+                // console.log("传进来的参数: ",middleData)
                 middleData.forEach(x => { //对时间消息进行处理
-                    let array = x.actDate.split(" ");
-                    x.actDate = array[0]+" "+array[1]+"-"+array[2];
+                    let array = x.actdate.split(" ");
+                    x.actdate = array[0]+" "+array[1]+"-"+array[2];
                 });
                 return middleData;
             },
 
             computingPages(totalPages){
-                if (totalPages <= 3) //暂时先用三来代替
+                if (totalPages <= this.pageSize) //暂时先用三来代替
                 {
                     return 10;
                 }
                 else
                 {
-                    return Math.ceil(totalPages/3) * 10;//Math.ceil->向上取整
+                    return Math.ceil(totalPages/ this.pageSize) * 10;//Math.ceil->向上取整
                 }
             },
 
@@ -105,16 +107,20 @@
             //下面是需要进行响应请求的函数
             //点击页面的响应
             currentPage(page){
-
                 this.currentPageVar = page;
-                if(this.searchedInf === null) //当搜索框没有值的时候，进行这种请求
+                var start = this.pageSize * (page - 1) + 1; // 开始的页数
+                console.log('start',start);
+                // var token = sessionStorage.getItem("token");
+                if(this.searchedInf === "") //当搜索框没有值的时候，进行这种请求
                 {
-                    this.$request.get('/actInf/page',{
+                    this.$request.get('/activity/page',{
                         params : {
-                            page : page
+                            size : this.pageSize,
+                            start : start
                         }
                     }).then((result) => {
-                        let middleData = result.data;//middleData是中间数组，不用管
+                        console.log("result",result)
+                        let middleData = result.data.data.actlist;//middleData是中间数组，不用管
                         this.pageNeedData.data1 = this.normalizingDate(middleData);
                     }).catch(err => {
                         console.log(err);
@@ -177,8 +183,9 @@
 
             //路由跳转函数
             giveRow(index){
-                console.log(index);
-                this.$router.push({path :"/actInf/moreInf" , query : { actId : this.pageNeedData.data1[index].actionId}});
+                // console.log(index);
+                console.log('come on',this.pageNeedData.data1[index])
+                this.$router.push({path :"/actInf/moreInf" , query : { actId : this.pageNeedData.data1[index].actionid}});
             },
 
 
@@ -187,11 +194,10 @@
 
         //初始化的响应
         created() {
-            this.$request.get("/actInf",{
+            this.$request.get(`/activity?size=${this.pageSize}`,{
             }).then((result) => {
-
                 let totalNumber = 0;
-                console.log(result);
+                // console.log(result);
                 if (result.data.status === "fail")
                 {
                     alert("登录已过期，请重新登录!");
@@ -199,13 +205,14 @@
                 }
                 else
                 {
-                    this.$store.state.teaName = result.data.teacherName;//设置教师名称
-                    totalNumber = result.data.actionNumber; //一共的页数，前端进行
+                    // this.$store.state.teaName = result.data.teacherName;//设置教师名称
+                    console.log(result)
+                    totalNumber = result.data.data.count; //一共的页数，前端进行
                     this.pageNum = this.computingPages(totalNumber); //计算页数
                     this.originPageNumber = this.pageNum;//缓存
-                    console.log(this.originPageNumber);
-
-                    this.pageNeedData.data1 = this.normalizingDate(result.data.data); //日期规格化
+                    let actList = result.data.data.actlist;
+                    // console.log(actList)
+                    this.pageNeedData.data1 = this.normalizingDate(actList); //日期规格化
                     this.pageNeedData.firstResData = [...this.pageNeedData.data1];//数组深度拷贝(解决引用类型问题)
                 }
 
