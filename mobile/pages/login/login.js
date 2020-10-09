@@ -56,16 +56,7 @@ Page({
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  },
+ 
 
   inputa: function (e) {
     this.setData({
@@ -82,9 +73,9 @@ Page({
     console.log(this.data.password)
     var that = this;
     wx.request({
-      url: 'http://148.70.73.191:4396/login',
+      url: 'http://175.24.63.102:8080/login',
       data:{
-        id: this.data.puId,
+        stuid: t0his.data.puId,
         pass: this.data.password
       },
       method:"POST",

@@ -9,7 +9,6 @@
 <input type='password' name="password" value="{{password}}" placeholder='password'  style="height:50%;"placeholder-style='color:white;text-align:center;letter-spacing:4rpx;font-size:35rpx;' bindinput="inputb"></input>
 <button id='login' bindtap='login'>login</button>
 </form>
-
-<text id='tip'>学生登录：用户名为学号   默认密码为123456</text>
-<text id='ad'>由一路工作室提供技术支持</text>
+  <text id='tip'>学生登录：用户名为学号   默认密码为123456</text>
+  <text id='ad'>由一路工作室提供技术支持</text>
 </view>
