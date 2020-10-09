@@ -49,6 +49,7 @@
     
 </template>
 <script>
+import qs from "qs";
     export default {
         name:'pubAction',
         data () {
@@ -85,7 +86,8 @@
                     maxPeople: [
                         { required: true, message: '请输入人数上限', trigger: 'blur' }
                     ]
-                }
+                },
+
             }
         },
         methods: {
@@ -93,17 +95,9 @@
                 var that = this;
                 this.$refs[name].validate((valid) => {
                     if (valid) {
-                        if(that.isserious === true || that.isserious === 1)
-                        {
-                            that.isserious = 1;
-                        }
-                        else
-                        {
-                            that.isserious = 0;
-                        }
-
                         let postData = that.formValidate;
-
+                        let time = that.formatTime(postData.acttime);
+                        that.formatBoolean(postData);
                         // let postData ={
                         //     "actTitle" : that.actTitle,
                         //     "actDate" : that.actDate ,
@@ -114,23 +108,49 @@
                         //     "maxPeople": that.maxPeople,
                         //     "actInfo" : that.actInfo
                         // };//发送的数据
-                        console.log(postData);
-                        postData.teachername = "白龙飞";
-                        that.$request.post("/teacher/put",{
-                            withCredentials : true,
+
+                        let datapost = {
+                            acttitle : postData.acttitle,
+                            actdate : postData.actdate + time,
+                            actplace : postData.actplace,
+                            maxpeople : postData.maxpeople,
+                            actinfo : postData.actinfo,
+                            teaid : sessionStorage.getItem("teaId"),
+                            actpriority :  postData.actpriority,
+                            actstate : 0
+                        }
+                        // debugger
+                        let strParam = qs.stringify(datapost)
+                        // debugger
+                        // debugger
+                        console.log(datapost)
+                        that.$request({
+                            url : `/teacher/activity/add?${strParam}`,
+                            method : "post",
                             headers : {
-                                "Content-Type":"application/x-www-form-urlencoded" //跨域字段处处理，json格式好
-                            },
-                            data : postData
-                        }).then((result) => {
+                                "Content-Type" : "application/x-www-form-urlencoded",
+                                "token" : sessionStorage.getItem("token")
+                            }
+                           }).then((result) => {
                             console.log(result);
-                            that.$Message.success('Success!');
+                            if(result.data.code === 200)
+                            {
+                                that.$Message.success('上传成功');
+                                setTimeout(() => {
+                                    location.reload();  //刷新下
+                                },2000)
+                            }else{
+                                throw new Error("上传失败!");
+                            }
                         }).catch((err) => {
                             console.log(err);
+                            this.$Message.warning("发送活动失败，请重新登录!");
+                            this.$router.push("/login");
                         })//为了防止手贱 把这里先注释掉
-
                     } else {
-                        this.$Message.error('Fail!');
+                        console.log("失败!");
+                        debugger
+                        this.$Message.error('发送活动失败,请查看输入的格式是否有误！');
                     }
                 })
             },
@@ -143,6 +163,20 @@
             },
             handleChangedTime(time){
                 this.formValidate.acttime = time;
+            },
+            formatBoolean(postData){
+                if(postData.istop === "true"){
+                    postData.actpriority = 3;
+                }else{
+                    if(postData.isserious === "true"){
+                        postData.actpriority = 2;
+                    }else{
+                        postData.actpriority = 1;
+                    }
+                }
+            },
+            formatTime(timeArr){
+                return ` ${timeArr[0]} ${timeArr[1]}`
             }
         }
     }

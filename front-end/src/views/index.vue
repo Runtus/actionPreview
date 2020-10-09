@@ -18,29 +18,20 @@
             this.$store.state.pageConfig.xl_offset_title  = 0;
             console.log(this.$store.state.dashboardWidth);
             this.$store.state.dashboard = true;
-            console.log(this.$store.state.dashboard);
-            this.$request.get('/pubAct',{
-                headers:{
-                    "Content-type":"text/plain;"
+            if(this.$store.state.teaName === "none"){
+                console.log(sessionStorage.getItem("token"))
+                if(sessionStorage.getItem("token")){
+                    this.$store.state.teaName = sessionStorage.getItem("teaName");
+                }else{
+                    this.$Message.error("请先登录!")
+                    this.$router.push("/login");
                 }
-            }).then(
-                (result) => {
-                    if(result.data.status === "success")
-                    {
-                        console.log("你好"+result.data.teacherName);
-                        this.$store.state.teaName = result.data.teacherName;
-                    }
-                    else
-                    {
-                        this.$Message.info("请重新登录!");
-                        this.$router.push("/login");
-                    }
+            }
+            else{
+                this.$Message.success(`${this.$store.state.teaName}老师，您好`);
+                console.log(this.$store.state.dashboard);
+            }
 
-
-                }
-            ).catch((err) => {
-                console.log(err);
-            })
         }
     }
 

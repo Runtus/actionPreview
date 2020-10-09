@@ -32,23 +32,23 @@
                 columns : [
                     {
                         title : "活动标题",
-                        key : "acttitle"
+                        key : "actTitle"
                     },
                     {
                         title: "活动时间",
-                        key : "actdate"
+                        key : "actDate"
                     },
                     {
                         title: "活动地点",
-                        key : "actplace"
+                        key : "actPlace"
                     },
                     {
                         title : "人数上限",
-                        key : "maxpeople"
+                        key : "maxPeople"
                     },
                     {
                         title: "发布活动的老师",
-                        key : "teachername",
+                        key : "teaName",
                         width: 150
                     },
                     {
@@ -70,7 +70,7 @@
                 },
 
                 pageNum : 0,
-                pageSize : 5,
+                pageSize : 5, // 每页个数
                 currentPageVar : 1,
                 index : 0,
                 searchedInf : "" ,//搜索框的数值
@@ -108,22 +108,24 @@
             //点击页面的响应
             currentPage(page){
                 this.currentPageVar = page;
-                var start = this.pageSize * (page - 1) + 1; // 开始的页数
-                console.log('start',start);
                 // var token = sessionStorage.getItem("token");
                 if(this.searchedInf === "") //当搜索框没有值的时候，进行这种请求
                 {
-                    this.$request.get('/activity/page',{
+                    this.$request.get('/teacher/activity/show',{
                         params : {
                             size : this.pageSize,
-                            start : start
+                            page : page
+                        },
+                        headers : {
+                            token : sessionStorage.getItem("token")
                         }
                     }).then((result) => {
-                        console.log("result",result)
-                        let middleData = result.data.data.actlist;//middleData是中间数组，不用管
-                        this.pageNeedData.data1 = this.normalizingDate(middleData);
+
+                        let middleData = result.data.data;//middleData是中间数组，不用管
+                        this.pageNeedData.data1 = this.formatTeaName(middleData);
                     }).catch(err => {
-                        console.log(err);
+                        this.$Message.error("登录已经过期，请重新登录!");
+                        this.$router.push("/login");
                     })
                 }
 
@@ -148,9 +150,9 @@
 
 
                 // window.location.href="http://127.0.0.1:8000/excel/excel-actions-list"
-                this.$request.get("/excel/excel-actions-list",{
+                this.$request.get("/teacher/activity/download",{
                     headers : {
-                        responseType : 'blob'
+                        token : sessionStorage.getItem("token")
                     }
                 })
                     .then((result) => {
@@ -160,8 +162,9 @@
                         }
                         else
                         {
+                            console.log(result)
                             //获得对应的下载
-                            window.location.href="http://118.31.105.159:3389/excel/excel-actions-list";
+                            // window.location.href="http://118.31.105.159:3389/excel/excel-actions-list";
                             // let blob = new Blob([result.data],{type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8'});
                             // let download = document.createElement('a');
                             // let href = window.URL.createObjectURL(blob);
@@ -185,38 +188,71 @@
             giveRow(index){
                 // console.log(index);
                 console.log('come on',this.pageNeedData.data1[index])
-                this.$router.push({path :"/actInf/moreInf" , query : { actId : this.pageNeedData.data1[index].actionid}});
+                this.$router.push({path :"/actInf/moreInf" , query : { actId : this.pageNeedData.data1[index].actId}});
             },
+
+            formatTeaName(arr){
+                if(arr instanceof Array){
+                    return arr.map(function(item,value,arr){
+                        item.teaName = item.teaName.teaname;
+                        return item;
+                    })
+                }else{
+                    return [];
+                }
+            }
 
 
 
         },
+        beforeCreate() {
+            if(this.$store.state.teaName === "none"){
+                if(sessionStorage.getItem("teaName")){
+                    this.$store.state.teaName = sessionStorage.getItem("teaName");
+                }else{
+                    this.$Message.error("登录已经过期，请重新登录!");
+                    this.$router.push("/login");
+                }
+            }
+        },
 
         //初始化的响应
         created() {
-            this.$request.get(`/activity?size=${this.pageSize}`,{
+
+
+
+            this.$request.get(`/teacher/activity/?size=${this.pageSize}`,{
+                headers : {
+                    "token" : sessionStorage.getItem("token")
+                }
             }).then((result) => {
                 let totalNumber = 0;
                 // console.log(result);
-                if (result.data.status === "fail")
+                if (result.data.code !== 200)
                 {
-                    alert("登录已过期，请重新登录!");
+                    this.$Message.error("登录已失效，请重新登录!");
+                    sessionStorage.clear();
                     this.$router.push("/login");
                 }
                 else
                 {
                     // this.$store.state.teaName = result.data.teacherName;//设置教师名称
-                    console.log(result)
-                    totalNumber = result.data.data.count; //一共的页数，前端进行
+                    let real_data = result.data.data;
+                    totalNumber = real_data.count; //一共的页数，前端进行
                     this.pageNum = this.computingPages(totalNumber); //计算页数
                     this.originPageNumber = this.pageNum;//缓存
-                    let actList = result.data.data.actlist;
-                    // console.log(actList)
-                    this.pageNeedData.data1 = this.normalizingDate(actList); //日期规格化
-                    this.pageNeedData.firstResData = [...this.pageNeedData.data1];//数组深度拷贝(解决引用类型问题)
-                }
+                    let actList = real_data.list;
+                    let newArr = this.formatTeaName(actList)
+                    console.log(newArr)
+                    this.pageNeedData.data1 = [...newArr];
 
+                    // console.log(actList)
+                    // console.log(this.pageNeedData.data1)
+                    this.pageNeedData.firstResData = [...this.pageNeedData.data1];//数组深度拷贝(解决引用类型问题)
+
+                }
             }).catch((err) => {
+                this.$Message.error("发现未知错误，请打开Console查看!");
                 console.log(err);
             });
         },
@@ -233,21 +269,24 @@
                 }
                 else
                 { //当索引框不为空的时候的请求
-                    this.$request.get("/actInf/search",{
-                        params : {
-                            searchedInf : searchedInf
+                    let token =sessionStorage.getItem("token");
+                    console.log("searchedInf:",searchedInf);
+                    this.$request.get(`/teacher/activity/select?actTitle=${searchedInf}`,{
+                        headers : {
+                            "token" : token
                         }
                     }).then((result) => {
-                        console.log(result.data);
-                        if (result.data === null)
+                        let real_data = result.data || [];
+                        console.log("real_data:",real_data)
+                        if (real_data.data.length === 0)
                         {
-                            this.pageNeedData.data1 = [...this.pageNeedData.firstResData];//为0的时候，把对应数据拷贝进去
+                            this.pageNeedData.data1 = real_data.data;//为0的时候，把对应数据拷贝进去
                         }
                         else
                         {
-                            console.log(result.data);
-                            this.pageNum = this.computingPages(result.data.pageNum);//进行搜索页数计算
-                            this.pageNeedData.data1 = result.data.searchedData;
+                            this.pageNum = this.computingPages(real_data.data.length);//进行搜索页数计算
+                            this.pageNeedData.data1 = real_data.data;
+                            console.log("pageneeddata",this.pageNeedData)
                             // this.pageNeedData.data1 = result.data;
                         }
                     }).catch((err) => {

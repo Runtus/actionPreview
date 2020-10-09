@@ -51,20 +51,26 @@
 
             },
             logOut(){
-                this.$request.get("/logout")
+                this.$request({
+                    url : "/teacher/logout",
+                    method : "POST",
+                    headers : {
+                        "token": sessionStorage.getItem("token")
+                    }
+                })
                 .then(result => {
-                    if(result.data.status === "session-empty")
+                    let real_data = result.data;
+                    if(real_data.code === 200)
                     {
-                        this.$Message.warning("账号已失效，即将跳转登录界面");
+                        this.$Message.success("登出成功！");
+                        sessionStorage.clear();
+                        setTimeout(() => {
+                            this.$router.push("/login")
+                        },1000)
                     }
-                    else
-                    {
-                        this.$Message.success("退出账号成功!");//全局提醒
-                    }
-                    this.$store.state.teaName = "";
-                    this.$router.push("/login");
                 }).catch(err => {
                     console.log(err);
+                    this.$Message.warning("登出发生错误，请联系管理员!");
                 });
             },
 

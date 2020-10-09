@@ -36,7 +36,7 @@
 <script>
     export default {
         name: "studentInf",
-        props: ["studentData"],
+        props: ["studentData","count"],
         data() {
             return {
                 columnConfig: [
@@ -154,7 +154,6 @@
             let screenWidth = document.documentElement.clientWidth;
             let screenHeight = document.documentElement.clientHeight;
             // console.log(screenHeight);
-
             this.columnConfig[3].width = screenWidth * 0.25;//设置申请理由表格宽度
             this.boxHeight = screenHeight * 0.57 + "px"; //设置本组件的高度
 
@@ -163,7 +162,7 @@
             //下面是表格分页的设置 包括学生名单和页数
             setTimeout(() => {
                 //下面是表格分页的设置 包括学生名单和页数
-                if(this.studentData.studentInf.length === 0)//又犯了一个错误，数组不能直接判等。
+                if(this.studentData.list.length === 0)//又犯了一个错误，数组不能直接判等。
                 {
                     this.studentList = [];
                     this.configData.originStudentList = [];//拷贝一份
@@ -171,9 +170,9 @@
                     this.configData.originPageNum = this.pageNum; //拷贝一份
                 }
                 else{
-                    this.studentList = this.studentData.studentInf;
+                    this.studentList = this.studentData.list;
                     this.configData.originStudentList = [...this.studentList];//拷贝一份
-                    this.pageNum = this.computingPages(this.studentData.studentsNum);//计算页数
+                    this.pageNum = this.computingPages(this.studentData.count);//计算页数
                     this.configData.originPageNum = this.pageNum; //拷贝一份
                     this.actionId = this.studentData.studentInf[0].actionId;//设置活动Id，需要查询
                 }

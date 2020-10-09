@@ -1,7 +1,7 @@
 <template>
     <Row class="actMoreInf" >
         <Col class="col-1" >
-            <student-inf v-bind:student-data="studentInf"></student-inf>
+            <student-inf v-bind:student-data="studentInf" v-bind:count="count"></student-inf>
         </Col>
     </Row>
 </template>
@@ -15,7 +15,8 @@
         data(){
             return {
                 studentInf : {},
-                pageSize : 5
+                pageSize : 5,
+                count : 0
             }
         },
         created() {
@@ -29,21 +30,32 @@
             }
             console.log(this.$route.query.actId);
             let actionId = this.$route.query.actId;
-            this.$request.get(`/stuinfo?id=${actionId}&size=${this.pageSize}&start=1`).then(result => {
-                if(result.data.status === "fail")
+            let that = this;
+            console.log(actionId);
+            this.$request.get(`/teacher/order/?actId=${actionId}&size=${this.pageSize}`,{
+                headers : {
+                    "token" : sessionStorage.getItem("token")
+                }
+            }).then(result => {
+                let real_data = result.data;
+                if(real_data.code !== 200)
                 {
-                    this.$Message.warning("登录已经失效，请重新登录!");
-                    this.$router.push("/login");
+                    that.$Message.warning("登录已经过期，请重新登录");
+                    sessionStorage.clear();
+                    that.$router.push("/login");
                 }
                 else
                 {
                     console.log(result.data);
-                    this.studentInf = result.data.data.stulist; //设置学生信息
+                    that.studentInf = real_data.data; //设置学生信息
+                    that.count = real_data.count;
                     // this.$store.state.teaName = result.data.teacherName;
                 }
 
             }).catch(err => {
                 console.log(err);
+                this.$Message.warning("登录已经过期，请重新登录");
+                this.$router.push("/login");
             });
 
             this.$store.state.dashboard = false;//dashboard板设置
