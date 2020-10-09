@@ -1,10 +1,10 @@
 <template>
 <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80" class="format"> 
-        <FormItem label="活动主题" prop="actTitle">
-            <Input v-model="formValidate.actTitle" placeholder="输入活动主题"></Input>
+        <FormItem label="活动主题" prop="acttitle">
+            <Input v-model="formValidate.acttitle" placeholder="输入活动主题"></Input>
         </FormItem>
-        <FormItem label="活动地点" prop="actPlace">
-            <Input v-model="formValidate.actPlace" placeholder="输入活动地点"></Input>
+        <FormItem label="活动地点" prop="actplace">
+            <Input v-model="formValidate.actplace" placeholder="输入活动地点"></Input>
         </FormItem>
         
         <FormItem label="活动日期">
@@ -23,23 +23,23 @@
                 </Col>
             </Row>
         </FormItem>
-        <FormItem label="人数上限" prop="maxPeople">
-            <Input v-model="formValidate.maxPeople" placeholder="输入人数上限"></Input>
+        <FormItem label="人数上限" prop="maxpeople">
+            <Input v-model="formValidate.maxpeople" placeholder="输入人数上限"></Input>
         </FormItem>
-        <FormItem label="是否加急" prop="isSerious">
-            <RadioGroup v-model="formValidate.isSerious">
+        <FormItem label="是否加急" prop="isserious">
+            <RadioGroup v-model="formValidate.isserious">
                 <Radio label="true">加急事件</Radio>
                 <Radio label="false">普通事件</Radio>
             </RadioGroup>
         </FormItem>
-        <FormItem label="是否置顶" prop="isTop">
-            <RadioGroup v-model="formValidate.isTop">
+        <FormItem label="是否置顶" prop="istop">
+            <RadioGroup v-model="formValidate.istop">
                 <Radio label="true">是</Radio>
                 <Radio label="false">否</Radio>
             </RadioGroup>
         </FormItem>
-        <FormItem label="活动详情" prop="actInfo">
-            <Input v-model="formValidate.actInfo" type="textarea" :autosize="{minRows: 5,maxRows: 5}" placeholder="Enter something..."></Input>
+        <FormItem label="活动详情" prop="actinfo">
+            <Input v-model="formValidate.actinfo" type="textarea" :autosize="{minRows: 5,maxRows: 5}" placeholder="Enter something..."></Input>
         </FormItem>
         <FormItem>
             <Button type="primary" @click="handleSubmit('formValidate')">提交</Button>
@@ -49,19 +49,20 @@
     
 </template>
 <script>
+import qs from "qs";
     export default {
         name:'pubAction',
         data () {
             return {
                 formValidate: {
-                    actTitle: '',
-                    actPlace: '',
-                    actDate: '',
-                    actTime: "",
-                    isSerious:'',
-                    isTop:'',
-                    actInfo: '',
-                    maxPeople:''
+                    acttitle: '',
+                    actplace: '',
+                    actdate: '',
+                    acttime: "",
+                    isserious:'',
+                    istop:'',
+                    actinfo: '',
+                    maxpeople:''
                 },
                 ruleValidate: {
                     actTitle: [
@@ -85,7 +86,8 @@
                     maxPeople: [
                         { required: true, message: '请输入人数上限', trigger: 'blur' }
                     ]
-                }
+                },
+
             }
         },
         methods: {
@@ -93,17 +95,9 @@
                 var that = this;
                 this.$refs[name].validate((valid) => {
                     if (valid) {
-                        if(that.isSerious === true || that.isSerious === 1)
-                        {
-                            that.isSerious = 1;
-                        }
-                        else
-                        {
-                            that.isSerious = 0;
-                        }
-
                         let postData = that.formValidate;
-
+                        let time = that.formatTime(postData.acttime);
+                        that.formatBoolean(postData);
                         // let postData ={
                         //     "actTitle" : that.actTitle,
                         //     "actDate" : that.actDate ,
@@ -114,21 +108,49 @@
                         //     "maxPeople": that.maxPeople,
                         //     "actInfo" : that.actInfo
                         // };//发送的数据
-                        console.log(postData);
-                        that.$request.post("/pubAct",postData,{
-                            withCredentials : true,
+
+                        let datapost = {
+                            acttitle : postData.acttitle,
+                            actdate : postData.actdate + time,
+                            actplace : postData.actplace,
+                            maxpeople : postData.maxpeople,
+                            actinfo : postData.actinfo,
+                            teaid : sessionStorage.getItem("teaId"),
+                            actpriority :  postData.actpriority,
+                            actstate : 0
+                        }
+                        // debugger
+                        let strParam = qs.stringify(datapost)
+                        // debugger
+                        // debugger
+                        console.log(datapost)
+                        that.$request({
+                            url : `/teacher/activity/add?${strParam}`,
+                            method : "post",
                             headers : {
-                                'Content-Type':'application/json;charset=utf-8' //跨域字段处处理，json格式好
+                                "Content-Type" : "application/x-www-form-urlencoded",
+                                "token" : sessionStorage.getItem("token")
                             }
-                        }).then((result) => {
+                           }).then((result) => {
                             console.log(result);
-                            that.$Message.success('Success!');
+                            if(result.data.code === 200)
+                            {
+                                that.$Message.success('上传成功');
+                                setTimeout(() => {
+                                    location.reload();  //刷新下
+                                },2000)
+                            }else{
+                                throw new Error("上传失败!");
+                            }
                         }).catch((err) => {
                             console.log(err);
+                            this.$Message.warning("发送活动失败，请重新登录!");
+                            this.$router.push("/login");
                         })//为了防止手贱 把这里先注释掉
-
                     } else {
-                        this.$Message.error('Fail!');
+                        console.log("失败!");
+                        debugger
+                        this.$Message.error('发送活动失败,请查看输入的格式是否有误！');
                     }
                 })
             },
@@ -137,10 +159,24 @@
             },
             handleChangedDate(date){
                 console.log(date);
-                this.formValidate.actDate = date;
+                this.formValidate.actdate = date;
             },
             handleChangedTime(time){
-                this.formValidate.actTime = time;
+                this.formValidate.acttime = time;
+            },
+            formatBoolean(postData){
+                if(postData.istop === "true"){
+                    postData.actpriority = 3;
+                }else{
+                    if(postData.isserious === "true"){
+                        postData.actpriority = 2;
+                    }else{
+                        postData.actpriority = 1;
+                    }
+                }
+            },
+            formatTime(timeArr){
+                return ` ${timeArr[0]} ${timeArr[1]}`
             }
         }
     }

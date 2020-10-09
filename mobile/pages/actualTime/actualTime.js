@@ -13,7 +13,7 @@ Page({
         nowMonth: "",
         nowYear: ""
       },
-    backgroundImg: ['../img/bj/b1.jpg', '../img/bj/b2.jpg', '../img/bj/b3.jpg', '../img/bj/b4.jpg', '../img/bj/b5.jpg'],
+      backgroundImg: ['../img/bj/b1.jpg', '../img/bj/b2.jpg', '../img/bj/b3.jpg', '../img/bj/b4.jpg', '../img/bj/b5.jpg'],
       choosenId : undefined,
       choosenTime : '',
       originInf : [],

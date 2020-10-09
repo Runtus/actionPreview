@@ -29,33 +29,39 @@
         methods:{
             Login(){
                 console.log(this.account + this.password);
-                this.$request.get("/login",{
-                    params : {
-                        aco : this.account ,
-                        psw : this.password
-                    },
-                    withCredentials: true, //cookie
-                    headers : {
-
-                    }
-                })
+                this.$request.post(`/teacher/login?teaId=${this.account}&password=${this.password}`)
                 .then(res => {
-                    console.log(res.data);
-                    let objOfName = res.data;
-                    if (objOfName.length !== 0)
-                    {
-                        console.log(objOfName[0].name);
-                        this.$store.state.teaName = objOfName[0].name;
-                        console.log(res);
-                        alert(objOfName[0].name + ", 您已经登陆成功!");
+                    console.log(res);
+                    let real_data = res.data;
+                    if(real_data.code === 200){
+                        let token = real_data.data.token;
+                        let teaName = real_data.data.teaName;
+                        this.$store.state.teaName = teaName;
+                        sessionStorage.setItem("token",token);
+                        sessionStorage.setItem("teaName",teaName);
+                        sessionStorage.setItem("teaId",this.account);
                         this.$router.push('/index');
+                    }else{
+                        throw new Error("出现了未知错误，后台问题");
                     }
-                    else{
-                        alert("账号密码错误，请重试!");
-                    }
+                    // let objOfName = res.data;
+                    // console.log(objOfName)
+                    // if (objOfName.code === 0)
+                    // {
+                    //     this.$store.state.teaName = objOfName.data.teachername;
+                    //     alert(objOfName.data.teachername + ", 您已经登陆成功!");
+                    //     sessionStorage.setItem("teacher",objOfName.data.teachername);
+                    //     // sessionStorage.setItem("token",objOfName.data.token);
+                    //     this.$router.push('/index');
+                    // }
+                    // else{
+                    //     alert("账号密码错误，请重试!");
+                    // }
+
                 }).catch(
                     (err) => {
                         console.log(err);
+                        alert("账号密码错误，请重试!");
                     }
                 )
             }

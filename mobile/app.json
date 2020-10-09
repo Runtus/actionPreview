@@ -1,10 +1,16 @@
 {
   "pages": [
+    "pages/appoint/appoint",
+    "pages/history/history",
+
+
+    "pages/moreInf/moreInf",
+
     "pages/login/login",
     "pages/test/test",
-    "pages/moreInf/moreInf",
-    "pages/history/history",
-    "pages/appoint/appoint",
+    
+    
+    
     "pages/exp/exp",
     "pages/actualTime/actualTime"
     
