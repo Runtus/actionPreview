@@ -1,3 +1,8 @@
+<cu-custom bgColor="bg-gradual-blue" isBack="{{true}}" class="top-bar" >
+  <view slot="backText">返回</view>
+  <view slot="content">xxxxxx活动</view>
+</cu-custom>
+
 <view id="HeadBox">
   <!-- <view id="mainInf">
     <view id="title" class="Inf">{{Inf.actTitle}}</view>
@@ -11,11 +16,11 @@
       </view>
   </view> -->
   <view id="title" class="Inf">
-    {{Inf[0].actTitle}}
+    {{Inf.actTitle}}
   </view>
-  <view class="tan"> <text>发表时间: {{Inf[0].actTime}}  </text> <text>  发布人: {{Inf[0].teaName}}</text> </view>
-  <view class="tan">活动地点：{{Inf[0].actPlace}}</view>
-  <view class="content"><text decode="{{true}}">&emsp;&emsp;{{Inf[0].actIntro}}</text></view>
+  <view class="tan"> <text>发表时间: {{Inf.actDate}}  </text> <text>  发布人: {{Inf.teaName}}</text> </view>
+  <view class="tan">活动地点：{{Inf.actPlace201809}}</view>
+  <view class="content"><text decode="{{true}}">&emsp;&emsp;{{Inf.actInfo}}</text></view>
   <button id="subscribe" bindtap="goSubscribe">预约</button>
 </view>
 

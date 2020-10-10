@@ -68,32 +68,53 @@ Page({
       password: e.detail.value
     });
   },
+
+  // 登录函数
   login:function(e){
     console.log(this.data.puId)
     console.log(this.data.password)
     var that = this;
-    wx.request({
-      url: 'http://175.24.63.102:8080/login',
-      data:{
-        stuid: t0his.data.puId,
-        pass: this.data.password
-      },
-      method:"POST",
-      success:function(res){
-        if(res.data == "success"){
-          console.log(that.data.puId);
-          app.globalData.stdNumber = that.data.puId
-          wx.navigateTo({
-            url: '../appoint/appoint',
-          })
-        }
-        else{
-          wx.showToast({
-            title: '账号密码错误',
-            image:'../img/fail.png'
-          })
-        }
+    wx.showLoading({
+      title: '正在登录',
+    })
+    wx.cloud.callFunction({
+      name : "login",
+      data : {
+        $url : "login",
+        stuId : that.data.puId,
+        stuPass : that.data.password
       }
+    })
+    .then(res => {
+      console.log(res);
+      let real_data = res.result;
+      if(real_data.code === 500 || real_data.code === "500"){
+        wx.hideLoading();
+        wx.showToast({
+          title: '密码错误',
+          image : "/pages/img/error.png",
+          duration : 1000
+        })
+      }else{
+        wx.showToast({
+          title: '登录成功',
+          duration : 1000
+        });
+        app.globalData.token = real_data.data; // 存取token
+        setTimeout(() => {
+          wx.switchTab({
+            url: '/pages/actualTime/actualTime',
+          })
+        },1000)
+      }
+    })
+    .catch(err => {
+      console.log(err)
+      wx.hideLoading();
+      wx.showToast({
+        title: '服务器异常',
+        image : "/pages/img/error.png"
+      })
     })
     
   },

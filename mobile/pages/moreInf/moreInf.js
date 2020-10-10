@@ -6,7 +6,7 @@ Page({
    */
   data: {
     pageId:0,
-    Inf : []
+    Inf : {}
   },
 
   /**
@@ -19,19 +19,9 @@ Page({
       actId : options.id
     })
     console.log(this.data.actId);
+    this.requestActionInf(this.data.actId)
     //console.log("学号为：" + app.globalData.userStudyNum);
-    wx.request({
-      url: 'http://148.70.73.191:4396/actSignle',
-      data:{
-        actid: options.id
-      },
-      success(res){
-        console.log(res);
-        that.setData({
-          Inf : res.data
-        })
-      }
-    })
+    
   },
 
   /**
@@ -48,64 +38,38 @@ Page({
     
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-    
-  },
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-    
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-    
-  },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
-    
-  },
-
-  /*前端测试判断函数，等后端接上后,该部分可以删除 */
-  // judgeNumber(){
-   
-  //   if(this.data.pageId == 1)
-  //   {
-  //     this.setData({
-  //       Inf : [{
-  //         actTitle : "成电讲坛"
-  //       }]
-  //     })
-  //   }
-  //   else if(this.data.pageId == 2)
-  //   {
-  //       this.setData({
-  //         Inf : [{
-  //           actTitle : "成电有点骚"
-  //         }]
-  //       })
-  //   }
-  // },
-
-
-
-  /***************************** */
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-    
-  },
+  requestActionInf(actId){
+    let token = app.globalData.token;
+    let that = this;
+    wx.cloud.callFunction({
+      name : "login",
+      data : {
+        $url : "detailInf",
+        token,
+        actId
+      }
+    })
+    .then(res => {
+      let real_data = res.result;
+      if(res.code === "500"){
+        console.log(res);
+      }else{
+        let inf = real_data.data;
+        console.log(inf)
+        that.setData({
+          Inf : inf[0]
+        })
+      }
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  },  
 
   goSubscribe(){
     var that = this;

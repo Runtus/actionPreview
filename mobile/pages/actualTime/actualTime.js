@@ -1,4 +1,5 @@
 var util = require('../../utils/util.js');
+let app = getApp();
 var date = new Date();//变量声明 注意和下面的realdate区别
 Page({
 
@@ -41,6 +42,8 @@ Page({
       },
       choosenTime: year + '-' + month + '-' + realdate
     })
+    // 请求活动信息
+      this.requestAction();
       /***********/
       if(this.data.choosenId === undefined)//即第一次进入页面的时候,判断是否具有id，如果没有id则赋值为当前的时间序列
       {
@@ -55,26 +58,26 @@ Page({
       var that = this;
 
 
-    wx.request({
-      url: 'http://148.70.73.191:4396/getAct',
-      // data:{
-      //   date_id : this.data.choosenId
-      // //可能还有用户id 后期来决定
-      // },
-      header: {
-        'content-type': 'json'
-      },
-      success: function (res) {
-        console.log(res.data);
-        that.setData({
-          Inf: res.data
-        });
-        that.regExp();//先排序 排序做好准备 
-        that.sortInf();//排序 产生初始排序数据
-        that.sortInfSerious();// 排序 产生紧急事件排序数据
-      }
+    // wx.request({
+    //   url: 'http://148.70.73.191:4396/getAct',
+    //   // data:{
+    //   //   date_id : this.data.choosenId
+    //   // //可能还有用户id 后期来决定
+    //   // },
+    //   header: {
+    //     'content-type': 'json'
+    //   },
+    //   success: function (res) {
+    //     console.log(res.data);
+    //     that.setData({
+    //       Inf: res.data
+    //     });
+    //     that.regExp();//先排序 排序做好准备 
+    //     that.sortInf();//排序 产生初始排序数据
+    //     that.sortInfSerious();// 排序 产生紧急事件排序数据
+    //   }
 
-    });
+    // });
 
        
   },
@@ -93,45 +96,39 @@ Page({
       
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-    
+  // 进入页面请求活动信息
+  requestAction(){
+    let token = app.globalData.token;
+    let that = this;
+    wx.cloud.callFunction({
+      name : "login",
+      data : {
+        $url : "actionInf",
+        token : token
+      }
+    })
+    .then(res => {
+      let real_data = res.result;
+      if(real_data.code === 500 || real_data.code === "500"){
+        console.log("请求出错")
+      }else{
+        console.log(real_data);
+        that.setData({
+          Inf : real_data.data
+        })
+      }
+    })
+    .catch(err => {
+      console.log(err);
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-    
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-    
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-    
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-    
-  },
 
   toGetMoreInf(res){
     console.log(res);
     var that = this;
     var actid = res.currentTarget.dataset.pageId;
+    console.log(actid)
     wx.navigateTo({
       url: '../moreInf/moreInf?id='+actid,
     })

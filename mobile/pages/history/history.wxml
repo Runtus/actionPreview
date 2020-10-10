@@ -1,15 +1,22 @@
-<view class='head'>
-  <text id='title'>预约记录查询</text>
-  <view id='tx'><image src='{{userInfo.avatarUrl}}'></image></view>
-  <text id='name'>{{userInfo.nickName}}</text>
-</view>
-<view class="bj"></view>
-<view wx:for="{{history}}" class='box'>
-<view class='content'>
-   <view class='info'><image src='../img/icon/文本文档.png'></image> <text>主题：{{item.theme}}</text> </view>
-  <view class='info'><image src='../img/icon/时钟.png'></image> <text>时间：{{item.time}}</text> </view>
-  <view class='info'><image src='../img/icon/位置标记.png'></image> <text>地点：{{item.address}}</text> </view>
-  <view class='info'><image src='../img/icon/左箭头.png'></image> <text>预约时间：{{item.aptime}}</text> </view>
+<cu-custom bgColor="bg-gradual-blue" ><view slot="content">个人主页</view></cu-custom>
+
+
+<view class="head">
+  <view class="content-box">
+    <view class="img-box">
+      <image src="{{userInfo.avatarUrl}}"></image>
+    </view>
+    <view class="self-intro">
+      <view class="name">
+        {{userInfo.nickName}}
+      </view>
+      <view class="xueYuan">
+        信息与软件工程学院(示范性软件学院)
+      </view>
+    </view>
   </view>
-  <view class='line'></view>
+</view>
+
+<view class="history-inf">
+
 </view>

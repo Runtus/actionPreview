@@ -1,3 +1,4 @@
+<cu-custom bgColor="bg-gradual-blue" ><view slot="content">首页</view></cu-custom>
 <view id="mainBox">
   <view id="calender">
   <!-- <picker mode="date" start="{{nowTime.nowYear}}-{{nowTime.nowMonth}}-{{nowTime.nowDate}}" end="{{nowTime.nowYear}}-{{nowTime.nowMonth}}-{{nowTime.nowDate+7}}"  bindchange="jumpTo">更换日期</picker> -->
@@ -12,34 +13,17 @@
         <view wx:for="{{Inf}}">  
           <view class='event'>
           <image src="../img/bj/b2.jpg" class='background'></image>
-          <view class='tran'> <view id='name'>{{item.actTitle}}</view>
+          <view class='tran'> <view id='name'>{{item.acttitle}}</view>
           <view id="top" wx:if="{{item.isTop}}">紧急事件</view>
-          <view id='time'>活动时间：{{item.actTime}}</view>
-          <view id='location'>活动地点：{{item.actPlace}}</view>
-          <view id='max_people'>所需人数：{{item.currentNum}}/{{item.maxNum}}</view>
+          <view id='time'>活动时间：{{item.actdate}}</view>
+          <view id='location'>活动地点：{{item.actplace}}</view>
+          <view id='max_people'>所需人数：{{item.maxpeople}}/{{item.maxpeople}}</view>
           <button  data-Page-id="{{item.actid}}" bindtap="toGetMoreInf">参加活动</button>
           </view>
         </view>
     </view>
 </view>
-  <!-- <view id="mainContent" wx:for="{{Inf}}" data-Page-id="{{item.actid}}" bindtap="toGetMoreInf">
-    <i-card title="{{item.actTitle}}" extra="{{item.actTime}}"  i-class="card" >
-      <view slot="content">{{item.actIntro}}</view>
-      <view  wx:if="{{item.isTop}}" style="color:red; margin-top:5px;" slot="content">紧急事件</view>
-      <view slot="content" style="margin-top:5px;">预约人数:{{item.currentNum}}/{{item.maxNum}}</view>
-      <view slot="footer">{{item.actPlace}}</view>
-    </i-card>
-  </view> -->
-  <!-- <view id="mainContent"  >
-      <view wx:for="{{Inf}}" id="subContent" bindtap="toGetMoreInf" data-Page-id="{{item.pageId}}">这括号不要忘记了 -->
-      <!-- <image src="../../image/sao.gif"></image> -->
-      <!-- <view id="actTitle" class="ssubContent">{{item.actTitle}}</view>
-      <view id="{{item.isSerious == true ? 'actTime-red': 'actTime'}}" class="ssubContent" >{{item.actTime}}</view>
-      <view id="LINE"></view>
-      <view id="actIntro" class="ssubContent">{{item.actIntro}}</view>
-      <view id="actPlace" class="ssubContent">地点:{{item.actPlace}}</view>
-      </view>
-  </view> -->
+
 
   
 </view>

@@ -1,26 +1,39 @@
 {
   "pages": [
-    "pages/appoint/appoint",
-    "pages/history/history",
-
-
-    "pages/moreInf/moreInf",
-
     "pages/login/login",
+    "pages/history/history",
+   
+    "pages/actualTime/actualTime",
+    "pages/appoint/appoint",
+    
+    "pages/moreInf/moreInf",
     "pages/test/test",
-    
-    
-    
-    "pages/exp/exp",
-    "pages/actualTime/actualTime"
-    
-    
-    
-    
-    
+    "pages/exp/exp"
     
   ],
+  "usingComponents": {
+    "cu-custom": "/colorui/components/cu-custom"
+  },
+  "tabBar": {
+    "color": "#cdcdcd",
+    "selectedColor": "#1296db",
+    "list": [
+      {
+        "pagePath": "pages/actualTime/actualTime",
+        "text": "首页",
+        "selectedIconPath": "/pages/img/chatclick.png",
+        "iconPath": "/pages/img/chatunclick.png"
+      },
+      {
+        "pagePath": "pages/history/history",
+        "text": "个人主页",
+        "selectedIconPath": "/pages/img/personclick.png",
+        "iconPath": "/pages/img/personunclick.png"
+      }
+    ]
+  },
   "window": {
+    "navigationStyle": "custom",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#FF3300",
     "navigationBarTitleText": "活动预约系统",
