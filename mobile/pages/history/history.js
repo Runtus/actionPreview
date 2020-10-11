@@ -11,11 +11,18 @@ Page({
       avatarUrl: "",//用户头像
       nickName: "",//用户昵称
     },
-
-    history:[]
+    history:[{
+      actTitle : "测试",
+      actDate : "2020-02-02",
+      actPlace : "沙河校区",
+      isOverTime : 0,
+      actId : 1,
+      isSuccess : 1,
+      previewTime : "2020-02-03 19:30:00"
+    }]
   },
 
-  /**
+  /** 
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {

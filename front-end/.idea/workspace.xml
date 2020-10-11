@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="abbdedc8-3031-4d8d-831a-1502c8c70c97" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../mobile/project.config.json" beforeDir="false" afterPath="$PROJECT_DIR$/../mobile/project.config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mobile/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/../mobile/app.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mobile/cloudfunction/login/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../mobile/cloudfunction/login/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mobile/pages/history/history.js" beforeDir="false" afterPath="$PROJECT_DIR$/../mobile/pages/history/history.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mobile/pages/history/history.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/../mobile/pages/history/history.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mobile/pages/history/history.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/../mobile/pages/history/history.wxss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,6 +134,7 @@
       <workItem from="1602034781271" duration="8891000" />
       <workItem from="1602145669995" duration="13476000" />
       <workItem from="1602232067841" duration="1914000" />
+      <workItem from="1602410678463" duration="4000" />
     </task>
     <servers />
   </component>

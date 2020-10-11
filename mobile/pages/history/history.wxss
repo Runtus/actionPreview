@@ -42,7 +42,64 @@
 
 /* 预约信息 */
 .history-inf{
+  padding-top: 30px;
+  border-top: 1px solid rgba(150,150,150);
   min-height: 400rpx;
   background-color: white;
   margin-top: 100rpx;
+  width: 100%;
+}
+
+.text{
+  font-size: 20px;
+  margin-left: 5%;
+}
+
+.history-box{
+  width: 100%;
+}
+
+
+.history{
+  width : 90%;
+  margin: 100rpx auto;
+  height: 300rpx;
+  border-radius: 10px;
+  box-shadow: 1px 1px 10px rgba(150,150,150);
+  position: relative;
+  padding: 20rpx;
+}
+
+.title {
+  font-size: 25px;
+  font-weight: 400;
+  border-bottom: 1px solid rgb(150,150,150);
+}
+
+
+.place{
+  margin-top: 30rpx;
+  font-size: 16px;
+}
+
+
+.date{
+  margin-top: 30rpx;
+  font-size: 16px;
+  
+}
+
+.btn{
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+}
+
+
+.preview-time{
+  position: absolute;
+  top: 50rpx;
+  left: 230rpx;
+  font-size: 13px;
+  color: rgb(200, 200, 200);
 }

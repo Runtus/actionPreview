@@ -18,5 +18,29 @@
 </view>
 
 <view class="history-inf">
-
+  <p class="text">
+    预约记录
+  </p>
+  <view class="history-box">
+    <view class="history" wx:for="{{history}}" wx:key="{{item.actId}}">
+      <view class="text-box">
+        <view class="title">
+          <text class="cuIcon-activity"></text>
+          <text>{{item.actTitle}}</text>
+        </view>
+        <view class="place"> 
+          地点: {{item.actPlace}}
+        </view>
+        <view class="date">
+          活动时间: {{item.actDate}}
+        </view>
+        <view class="preview-time">
+          预约时间: {{item.previewTime}}
+        </view>
+      </view>
+      <view class="btn">
+        <button class="cu-btn round line-red">取消</button>
+      </view>
+    </view>
+  </view>
 </view>

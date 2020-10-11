@@ -2,6 +2,7 @@
   "pages": [
     "pages/login/login",
     "pages/history/history",
+    
    
     "pages/actualTime/actualTime",
     "pages/appoint/appoint",

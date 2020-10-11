@@ -65,7 +65,12 @@ exports.main = async (event, context) => {
   })
 
   app.router("history", async (ctx) => {
-    
+    let query = ctx._req.event;
+    let token = query.token;
+
+    await axios({
+      
+    })
   })
   
   return await app.serve();
